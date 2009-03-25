@@ -1,0 +1,4 @@
+body{ font: 2em "Georgia", serif; text-align:center; }
+.countdown_row{ width: 11.3em; white-space: nowrap; margin:0 auto; text-align:left; }
+.countdown_amount{ font-size:3em; }
+.countdown_section{ float:left; margin:1em; }

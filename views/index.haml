@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %script{ :src => "js/jquery.js", :type => "text/javascript" }
+    %script{ :src => "js/jquery.countdown.js", :type => "text/javascript" }
+    %script{ :src => "js/pomodoro.js", :type => "text/javascript" }
+    :javascript
+      $(document).ready(function(){
+        $('input[type=button]').click(function(){tickTock(this)});
+      });
+    %link{ :rel => 'stylesheet', :href => 'css/pomodoro.css', :type => 'text/css' }
+    %title Pomodoro!
+  %body
+    %input#pomodoro{ :name => "pomodoro", :value => "pomodoro", :type => "button" }
+    %input#short{ :name => "short", :value => "short", :type => "button" }
+    %input#long{ :name => "long", :value => "long", :type => "button" }
+    %p.status No time like the present
+    #countdown
