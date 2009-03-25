@@ -6,21 +6,21 @@
     <script src='javascripts/jquery.js' type='text/javascript'></script>
     <script src='javascripts/jquery.countdown.js' type='text/javascript'></script>
     <script type='text/javascript'>
-      function milliseconds(period){
+      function minToMil(minutes){
+        return 1000*60*minutes;
+      }
+      function pomo(period){
         switch(period){
-          case 'short':
-            return 1000 * 60 * 5;
-          case 'long':
-            return 1000 * 60 * 15;
-          case 'pomodoro':
-            return 1000 * 60 * 25;
+          case 'short':    return {message:'Short break',duration:minToMil(5)};
+          case 'long':     return {message:'Long break',duration:minToMil(15)};
+          case 'pomodoro': return {message:'Pomodoro',duration:minToMil(25)};
         }
       }
       function tickTock(elm){
         $('#countdown').countdown({
-          until: new Date((new Date).valueOf() + milliseconds(elm.id)),
+          until: new Date((new Date).valueOf() + pomo(elm.id).duration),
           onExpiry: function(){
-            $('p.status').html(elm.id + " completed!");
+            $('p.status').html(pomo(elm.id).message + " completed!");
             $('body').css('background','#C01000');
           },
           alwaysExpire: true,
@@ -42,9 +42,9 @@
     <title>Index</title>
   </head>
   <body>
+    <input type='button' value='pomodoro' name='pomodoro' id='pomodoro' />
     <input type='button' value='short' name='short' id='short' />
     <input type='button' value='long' name='long' id='long' />
-    <input type='button' value='pomodoro' name='pomodoro' id='pomodoro' />
     <p class='status'>No time like the present</p>
     <div id='countdown'></div>
   </body>
