@@ -21,6 +21,7 @@
           until: new Date((new Date).valueOf() + milliseconds(elm.id)),
           onExpiry: function(){
             $('p.status').html(elm.id + " completed!");
+            $('body').css('background','#C01000');
           },
           alwaysExpire: true,
           format: 'MS'
@@ -48,3 +49,4 @@
     <div id='countdown'></div>
   </body>
 </html>
+
