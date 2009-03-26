@@ -1,4 +1,5 @@
 $.countdown.setDefaults({alwaysExpire: true, format: 'MS'})
+soundManager.url = 'swf/'
 
 function minToMil(minutes){
   return 1000*60*minutes;
@@ -19,6 +20,7 @@ function tickTock(elm){
       document.title = 'DING!';
       $('p.status').text(pomo(elm.id).message + " completed!");
       $('body').css('background-color','#C01000');
+      soundManager.play('ding','/sounds/ding.mp3');
     },
     onStart: function(){
       document.title = pomo(elm.id).message + ' in progress';
