@@ -1,3 +1,5 @@
+$.countdown.setDefaults({alwaysExpire: true, format: 'MS'})
+
 function minToMil(minutes){
   return 1000*60*minutes;
 }
@@ -10,19 +12,28 @@ function pomo(period){
   }
 }
 
+function setRunningMessage(period){
+  var msg = pomo(period).message + ' in progress';
+  document.title = msg;
+  $('p.status').text(msg);
+}
+
 function tickTock(elm){
-  var running_message = pomo(elm.id).message + ' in progress';
-  document.title = running_message;
-  $('p.status').text(running_message);
-  $('#countdown').countdown({
+  setRunningMessage(elm.id);
+  settings = {
     until: new Date((new Date).valueOf() + pomo(elm.id).duration),
     onExpiry: function(){
       $('p.status').text(pomo(elm.id).message + " completed!");
       $('body').css('background','#C01000');
       document.title = 'DING!';
-    },
-    alwaysExpire: true,
-    format: 'MS'
-  });
+    }
+  }
+  if($('#countdown div').size() == 0) {
+    $('#countdown').countdown(settings);
+  } else {
+    if(!confirm('are you sure you want to change this timer?')) return;
+    $('body').css('background','#fff');
+    $('#countdown').countdown('change', settings);
+  }
 }
 
