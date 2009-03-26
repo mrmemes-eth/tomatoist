@@ -32,6 +32,7 @@ function Countdown() {
     description: '', // The description displayed for the countdown
     expiryUrl: null, // A URL to load upon expiry, replacing the current page
     alwaysExpire: false, // True to trigger onExpiry even if never counted down
+    onStart: null, // Callback when the countdown expires -
     onExpiry: null, // Callback when the countdown expires -
       // receives no parameters and 'this' is the containing division
     onTick: null, // Callback when the countdown is updated -
@@ -78,6 +79,11 @@ $.extend(Countdown.prototype, {
     this._adjustSettings(inst);
     $.data(target[0], PROP_NAME, inst);
     this._updateCountdown(target, inst);
+    /* call our onStart callback since the timer is just initialized */
+    var onStart = this._get(inst, 'onStart');
+    if (onStart) {
+      onStart.apply(target[0],[]);
+    }
   },
 
   /* Redisplay the countdown with an updated display.
@@ -134,6 +140,11 @@ $.extend(Countdown.prototype, {
       this._adjustSettings(inst);
       $.data(target, PROP_NAME, inst);
       this._updateCountdown(target, inst);
+      /* call our onStart callback since the timer is just initialized */
+      var onStart = this._get(inst, 'onStart');
+      if (onStart) {
+        onStart.apply(target[0],[]);
+      }
     }
   },
 
