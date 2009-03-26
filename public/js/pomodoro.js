@@ -12,27 +12,26 @@ function pomo(period){
   }
 }
 
-function setRunningMessage(period){
-  var msg = pomo(period).message + ' in progress';
-  document.title = msg;
-  $('p.status').text(msg);
-}
-
 function tickTock(elm){
-  setRunningMessage(elm.id);
   settings = {
     until: new Date((new Date).valueOf() + pomo(elm.id).duration),
     onExpiry: function(){
-      $('p.status').text(pomo(elm.id).message + " completed!");
-      $('body').css('background','#C01000');
       document.title = 'DING!';
+      $('p.status').text(pomo(elm.id).message + " completed!");
+      $('body').css('background-color','#C01000');
+    },
+    onStart: function(){
+      document.title = pomo(elm.id).message + ' in progress';
+      $('p.status').text(pomo(elm.id).message + ' in progress');
+      $('body').css('background-color','#fff');
     }
   }
   if($('#timer div').size() == 0) {
     $('#timer').countdown(settings);
   } else {
-    if(!confirm('are you sure you want to change this timer?')) return;
-    $('body').css('background','#fff');
+    if(document.title != 'DING!'){
+      if(!confirm('are you sure you want to change this timer?')) return;
+    }
     $('#timer').countdown('change', settings);
   }
 }
