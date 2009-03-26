@@ -28,12 +28,12 @@ function tickTock(elm){
       document.title = 'DING!';
     }
   }
-  if($('#countdown div').size() == 0) {
-    $('#countdown').countdown(settings);
+  if($('#timer div').size() == 0) {
+    $('#timer').countdown(settings);
   } else {
     if(!confirm('are you sure you want to change this timer?')) return;
     $('body').css('background','#fff');
-    $('#countdown').countdown('change', settings);
+    $('#timer').countdown('change', settings);
   }
 }
 
