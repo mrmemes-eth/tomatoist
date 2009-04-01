@@ -8,6 +8,7 @@ end
 
 get '/:session' do
   @session = Session.first(:name => params[:session])
+  redirect '/' unless @session
   haml :index
 end
 

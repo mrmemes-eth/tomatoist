@@ -21,6 +21,12 @@ describe 'Ding' do
       Session.stub!(:first).and_return(@session)
     end
 
+    it "redirects to root when specified session does not exist" do
+      Session.stub!(:first).and_return(nil)
+      get '/whateva'
+      response.headers['Location'].should == "/"
+    end
+
     it "retrieves the specified session" do
       Session.should_receive(:first).with(:name => 'foobar')
       get '/foobar'
