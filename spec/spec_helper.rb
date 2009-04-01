@@ -6,6 +6,8 @@ require 'sinatra/test'
 
 require 'dm-sweatshop'
 
+require 'ding'
+
 $:.push File.join(File.dirname(__FILE__), '..', 'lib', 'models')
 
 require 'session'
