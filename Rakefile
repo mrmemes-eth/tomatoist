@@ -1,7 +1,4 @@
-$:.push File.join(File.dirname(__FILE__), 'lib', 'models')
-
 require 'rubygems'
-require 'session'
 require 'spec/rake/spectask'
 
 task :default => :spec
