@@ -8,8 +8,7 @@ get '/' do
 end
 
 get '/:session' do
-  @session = Session.first(:name => params[:session])
-  redirect '/' unless @session
+  redirect '/' unless @session = Session.first(:name => params[:session])
   haml :index
 end
 
