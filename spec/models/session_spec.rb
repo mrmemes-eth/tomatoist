@@ -4,6 +4,11 @@ describe Session do
   after do
     Session.all.destroy!
   end
+  it "should have timers" do
+    session = Session.gen
+    session.timers.all?{|t| t.kind_of?(Timer) }.should be_true
+  end
+
   it "should instantiate" do
     Session.new.should_not be_nil
   end

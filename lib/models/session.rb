@@ -10,6 +10,8 @@ class Session
   property :id, Serial
   property :name, String
 
+  has n, :timers
+
   before :create, :generate_name
 
   def generate_name

@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Timer do
   it "populates created_at" do
-    Timer.gen.created_at.should_not be_nil
+    Timer.pick.created_at.should_not be_nil
   end
 
   it "requires a duration" do
