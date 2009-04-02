@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'spec/rake/spectask'
 
+require 'environment'
+
 task :default => :spec
 
 desc "Run specs"

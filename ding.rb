@@ -1,13 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 
-require 'datamapper'
-DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db/ding.sqlite3")
-
-$:.unshift(File.join(File.dirname(__FILE__),'lib','models'))
-
-require 'session'
-require 'timer'
+require 'environment'
 
 get '/' do
   redirect "/#{Session.create.name}"
