@@ -13,18 +13,18 @@ function pomo(period){
   }
 }
 
-function tickTock(elm){
+function tickTock(name,year,month,day,hour,minute,second){
   settings = {
-    until: new Date((new Date).valueOf() + pomo(elm.id).duration),
+    until: new Date(year,month,day,hour,minute,second),
     onExpiry: function(){
       document.title = 'DING!';
-      $('p.status').text(pomo(elm.id).message + " completed!");
+      $('p.status').text(name + " completed!");
       $('body').css('background-color','#C01000');
       soundManager.play('ding','/sounds/ding.mp3');
     },
     onStart: function(){
-      document.title = pomo(elm.id).message + ' in progress';
-      $('p.status').text(pomo(elm.id).message + ' in progress');
+      document.title = name + ' in progress';
+      $('p.status').text(name + ' in progress');
       $('body').css('background-color','#fff');
     }
   }
