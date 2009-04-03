@@ -12,3 +12,9 @@ get '/:session' do
   haml :timers
 end
 
+post '/:session/timers' do
+  session = Session.first(:name => params[:session])
+  session.timers.create(:timer => params[:timer])
+  redirect "/#{session.name}"
+end
+
