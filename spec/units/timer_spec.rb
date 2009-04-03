@@ -26,5 +26,17 @@ describe Timer do
     timer.stub!(:expiry).and_return(time)
     timer.to_js.should == [2009,3,1,16,20,0]
   end
+
+  context 'creating named timers' do
+    it 'creates a short timer' do
+      Timer.new(:timer => 'short').duration.should == 5*60
+    end
+    it 'creates a long timer' do
+      Timer.new(:timer => 'long').duration.should == 15*60
+    end
+    it 'creates a pomodoro timer' do
+      Timer.new(:timer => 'pomo').duration.should == 25*60
+    end
+  end
 end
 

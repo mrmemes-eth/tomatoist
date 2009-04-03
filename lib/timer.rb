@@ -9,6 +9,14 @@ class Timer
 
   validates_present :duration, :session_id
 
+  def timer=(type)
+    case type
+    when 'short'; self.duration = 5*60
+    when 'long' ; self.duration = 15*60
+    when 'pomo' ; self.duration = 25*60
+    end
+  end
+
   def expiry
     created_at + duration
   end
