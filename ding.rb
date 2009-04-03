@@ -9,6 +9,6 @@ end
 
 get '/:session' do
   redirect '/' unless @session = Session.first(:name => params[:session])
-  haml :index
+  haml :timers
 end
 
