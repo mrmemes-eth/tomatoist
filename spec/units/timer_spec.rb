@@ -38,5 +38,17 @@ describe Timer do
       Timer.new(:timer => 'pomo').duration.should == 25*60
     end
   end
+
+  context 'retrieving a timers name' do
+    it 'identifies a short timer' do
+      Timer.gen(:duration => 5*60).name.should == 'short'
+    end
+    it 'identifies a long timer' do
+      Timer.gen(:duration => 15*60).name.should == 'long'
+    end
+    it 'identifies a short timer' do
+      Timer.gen(:duration => 25*60).name.should == 'pomo'
+    end
+  end
 end
 

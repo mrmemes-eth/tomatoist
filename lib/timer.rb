@@ -8,13 +8,16 @@ class Timer
   belongs_to :session
 
   validates_present :duration, :session_id
+  MAPPINGS = { 'short' => 5*60,
+                'long' => 15*60,
+                'pomo' => 25*60 }
 
   def timer=(type)
-    case type
-    when 'short'; self.duration = 5*60
-    when 'long' ; self.duration = 15*60
-    when 'pomo' ; self.duration = 25*60
-    end
+    self.duration = MAPPINGS[type]
+  end
+
+  def name
+    MAPPINGS.detect{|k,v| v == duration}.first
   end
 
   def expiry
