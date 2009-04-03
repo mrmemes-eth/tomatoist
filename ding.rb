@@ -10,6 +10,10 @@ helpers do
   def session_path(session)
     "/#{session.name}"
   end
+  def session_timers_path(session)
+    "#{session_path(session)}/timers"
+  end
+
 end
 
 get '/' do
@@ -17,7 +21,8 @@ get '/' do
 end
 
 get '/:session' do
-  redirect root_path unless @session = Session.first(:name => params[:session])
+  @session = Session.first(:name => params[:session])
+  redirect root_path unless @session
   haml :timers
 end
 
