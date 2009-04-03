@@ -3,18 +3,27 @@ require 'sinatra'
 
 require 'environment'
 
+helpers do
+  def root_path
+    "/"
+  end
+  def session_path(session)
+    "/#{session.name}"
+  end
+end
+
 get '/' do
-  redirect "/#{Session.create.name}"
+  redirect session_path(Session.create)
 end
 
 get '/:session' do
-  redirect '/' unless @session = Session.first(:name => params[:session])
+  redirect root_path unless @session = Session.first(:name => params[:session])
   haml :timers
 end
 
 post '/:session/timers' do
   session = Session.first(:name => params[:session])
   session.timers.create(:timer => params[:timer])
-  redirect "/#{session.name}"
+  redirect session_path(session)
 end
 
