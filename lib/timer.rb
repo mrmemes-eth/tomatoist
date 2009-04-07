@@ -1,3 +1,5 @@
+require 'time'
+
 class Timer
   include DataMapper::Resource
 
@@ -8,6 +10,11 @@ class Timer
   belongs_to :session
 
   validates_present :duration, :session_id
+
+  before :create do
+    self.created_at = Time.now.utc
+  end
+
   MAPPINGS = { 'short' => 5*60,
                 'long' => 15*60,
                 'pomo' => 25*60 }
@@ -29,5 +36,6 @@ class Timer
     a[1] = a[1] - 1
     a
   end
+
 end
 
