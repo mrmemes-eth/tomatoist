@@ -14,6 +14,7 @@ function pomo(period){
 }
 
 function tickTock(name,year,month,day,hour,minute,second){
+  hour = hour - (new Date).getTimezoneOffset()/60;
   settings = {
     until: new Date(year,month,day,hour,minute,second),
     onExpiry: function(){
