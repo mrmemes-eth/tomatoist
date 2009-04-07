@@ -6,11 +6,11 @@ describe Timer do
   end
 
   it "requires a duration" do
-    Timer.gen(:duration => nil).should_not be_valid
+    Timer.gen(:duration => nil).errors[:duration].should_not be_nil
   end
 
   it "requires a session_id" do
-    Timer.gen(:session_id => nil).should_not be_valid
+    Timer.gen(:session_id => nil).errors[:session_id].should_not be_nil
   end
 
   it "gives a date of expiry" do
