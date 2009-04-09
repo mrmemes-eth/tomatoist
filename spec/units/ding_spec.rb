@@ -3,6 +3,25 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 describe 'Ding' do
   include Sinatra::Test
 
+  context "a PUT to /:session" do
+    before do
+      @session = Session.gen(:name => "af")
+    end
+
+    it "should rename the Session" do
+      put '/af', :custom => "voxdolo"
+      @session.reload
+      Session.retrieve("voxdolo").should == @session
+    end
+
+    it "should redirect to the session path after creation" do
+      Session.stub!(:retrieve).and_return(@session)
+      put '/af', :custom => 'voxdolo'
+      response.headers['Location'].should == "/#{@session.custom}"
+    end
+
+  end
+
   context "a POST to /:session/timers" do
     before do
       @session = Session.gen
@@ -41,17 +60,16 @@ describe 'Ding' do
   context "a GET to '/:session'" do
     before do
       @session = Session.gen
-      Session.stub!(:first).and_return(@session)
     end
 
     it "redirects to root when specified session does not exist" do
-      Session.stub!(:first).and_return(nil)
+      Session.stub!(:retrieve).and_return(nil)
       get '/whateva'
       response.headers['Location'].should == "/"
     end
 
     it "retrieves the specified session" do
-      Session.should_receive(:first).with(:name => 'foobar')
+      Session.should_receive(:retrieve).with('foobar')
       get '/foobar'
     end
   end

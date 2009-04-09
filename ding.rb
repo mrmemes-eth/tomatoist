@@ -13,7 +13,6 @@ helpers do
   def session_timers_path(session)
     "#{session_path(session)}/timers"
   end
-
 end
 
 get '/' do
@@ -21,13 +20,19 @@ get '/' do
 end
 
 get '/:session' do
-  @session = Session.first(:name => params[:session])
+  @session = Session.retrieve(params[:session])
   redirect root_path unless @session
   haml :timers
 end
 
+put '/:session' do
+  session = Session.retrieve(params[:session])
+  session.update_attributes(:custom => params[:custom])
+  redirect session_path(session)
+end
+
 post '/:session/timers' do
-  session = Session.first(:name => params[:session])
+  session = Session.retrieve(params[:session])
   session.timers.create(:timer => params[:timer])
   redirect session_path(session)
 end

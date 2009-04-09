@@ -7,6 +7,11 @@
 %form{:action => session_timers_path(@session), :method => :post}
   %input{:type => 'hidden', :name => 'timer', :value => 'long'}
   %input#long{ :value => "long", :type => "submit" }
+
+%form{:action => session_path(@session), :method => :post}
+  %input{:type => 'text', :name => 'custom'}
+  %input{:type => 'hidden', :name => '_method', :value => 'put'}
+  %input#long{ :value => "rename", :type => "submit" }
 %p.status No time like the present
 #timer
 
