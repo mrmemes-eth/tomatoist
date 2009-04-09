@@ -13,6 +13,11 @@ describe Session do
     Session.create.name.should =~ /\w{2,}/
   end
 
+  it "should retrieve a session by name" do
+    @session = Session.gen(:name => "voxdolo")
+    Session.first(:name => "voxdolo").should == @session
+  end
+
   it "finds the last generated name" do
     Session.gen
     Session.gen
