@@ -5,4 +5,12 @@ body{ font: 2em "Georgia", serif; text-align:center; }
 #timer{overflow:auto}
 #timer_buttons form{display:inline;}
 #rename{position:absolute;right:.5em;top:0em;}
+#history small{font-size:.5em}
+#history ul{
+  text-align:left;
+  width:350px;
+  margin:0 auto;
+}
+#history ul li{list-style:none;}
+
 

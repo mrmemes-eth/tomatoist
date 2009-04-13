@@ -15,4 +15,9 @@
 
 %p.status No time like the present
 #timer
+#history
+  %p Timer History
+  %ul
+    - @session.timers(:order => [:created_at.desc], :limit => 5).each do |timer|
+      %li== #{timer.name} <small>(#{timer.created_at.strftime('%m/%d at %l:%M%p UTC')})</small>
 
