@@ -41,13 +41,13 @@ describe Timer do
 
   context 'retrieving a timers name' do
     it 'identifies a short timer' do
-      Timer.gen(:duration => 5*60).name.should == 'short'
+      Timer.gen(:duration => 5*60).name.should == 'Short Break'
     end
     it 'identifies a long timer' do
-      Timer.gen(:duration => 15*60).name.should == 'long'
+      Timer.gen(:duration => 15*60).name.should == 'Long Break'
     end
     it 'identifies a short timer' do
-      Timer.gen(:duration => 25*60).name.should == 'pomo'
+      Timer.gen(:duration => 25*60).name.should == 'Pomodoro'
     end
   end
 end

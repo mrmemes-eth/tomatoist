@@ -15,16 +15,16 @@ class Timer
     self.created_at = Time.now.utc
   end
 
-  MAPPINGS = { 'short' => 5*60,
-                'long' => 15*60,
-                'pomo' => 25*60 }
+  MAPPINGS = { 'short' => {:duration => 5*60,  :long_name => 'Short Break'},
+               'long'  => {:duration => 15*60, :long_name => 'Long Break'},
+               'pomo'  => {:duration => 25*60, :long_name => 'Pomodoro'} }
 
   def timer=(type)
-    self.duration = MAPPINGS[type]
+    self.duration = MAPPINGS[type][:duration]
   end
 
   def name
-    MAPPINGS.detect{|k,v| v == duration}.first
+    MAPPINGS.detect{|k,v| v[:duration] == duration}.last[:long_name]
   end
 
   def expiry
