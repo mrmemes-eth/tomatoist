@@ -27,6 +27,18 @@ describe Timer do
     timer.to_js.should == [2009,3,1,16,20,0]
   end
 
+  context "displaying timer times" do
+    it 'should show not show month & day if timer was created today' do
+       timer = Timer.gen(:with_session)
+       timer.display_time.should_not =~ /at/
+    end
+    it 'should show month & day if timer was not created today' do
+       timer = Timer.gen(:with_session)
+       timer.stub!(:created_at).and_return(Time.now - 60 * 60 * 24)
+       timer.display_time.should =~ /at/
+    end
+  end
+
   context 'creating named timers' do
     it 'creates a short timer' do
       Timer.new(:timer => 'short').duration.should == 5*60

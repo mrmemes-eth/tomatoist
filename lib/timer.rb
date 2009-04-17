@@ -19,6 +19,18 @@ class Timer
                'long'  => {:duration => 15*60, :long_name => 'Long Break'},
                'pomo'  => {:duration => 25*60, :long_name => 'Pomodoro'} }
 
+  def self.recent
+    all(:order => [:created_at.desc], :limit => 8)
+  end
+
+  def display_time
+    if created_at.day == Date.today.day
+      created_at.strftime('%l:%M%p UTC').gsub(/^\s+/,'')
+    else
+      created_at.strftime('%m/%d at %l:%M%p UTC')
+    end
+  end
+
   def timer=(type)
     self.duration = MAPPINGS[type][:duration]
   end
