@@ -24,7 +24,7 @@ class Timer
   end
 
   def display_time
-    if created_at.day == Date.today.day
+    if created_at.day == Time.now.utc.day
       created_at.strftime('%l:%M%p UTC').gsub(/^\s+/,'')
     else
       created_at.strftime('%m/%d at %l:%M%p UTC')
