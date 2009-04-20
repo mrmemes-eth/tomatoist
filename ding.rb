@@ -33,7 +33,7 @@ end
 
 post '/:session/timers' do
   session = Session.retrieve(params[:session])
-  session.timers.create(:timer => params[:timer])
+  session.timers.create(:timer => params[:timer], :offset => params[:offset])
   redirect session_path(session)
 end
 

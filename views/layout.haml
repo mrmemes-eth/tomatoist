@@ -10,6 +10,9 @@
       :javascript
         $(document).ready(function(){
           tickTock('#{timer.name}',#{timer.to_js.join(",")});
+          $("input[type=hidden][name=offset]").each(function() {
+            setTimezoneOffset(this);
+          });
         });
     %link{ :rel => 'stylesheet', :href => 'css/pomodoro.css', :type => 'text/css' }
     %title= @title || 'Pomodoro!'
