@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Timer do
   it "populates created_at" do
-    Timer.gen(:session => Session.gen).created_at.should_not be_nil
+    Timer.gen(:session => Session.gen).created_at.should be_kind_of(Time)
   end
 
   it "requires a duration" do
@@ -27,7 +27,7 @@ describe Timer do
     timer.to_js.should == [2009,3,1,16,20,0]
   end
 
-  context "displaying timer times" do
+  context "displaying times" do
     it 'should show not show month & day if timer was created today' do
        timer = Timer.gen(:with_session)
        timer.display_time.should_not =~ /at/
@@ -36,6 +36,20 @@ describe Timer do
        timer = Timer.gen(:with_session)
        timer.stub!(:created_at).and_return(Time.now - 60 * 60 * 24)
        timer.display_time.should =~ /at/
+    end
+  end
+
+  context 'created_at timezone' do
+    it 'is UTC by default' do
+      timer = Timer.gen(:with_session)
+      timer.created_at.should be_utc
+    end
+    it 'converts to a tz appropriate time when an offset is given' do
+      time = Time.now
+      Time.stub!(:now).and_return(time)
+      offset = Time.zone_offset(Time.now.zone)/60/60
+      timer = Timer.gen(:with_session, :offset => offset)
+      (timer.created_at.to_a[2] - timer.offset.to_i).should == time.to_a[2]
     end
   end
 
