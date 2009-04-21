@@ -45,6 +45,10 @@ describe Timer do
       timer = Timer.gen(:with_session)
       timer.display_time.should =~ /UTC/
     end
+    it "notes that it's UTC if the offset is blank" do
+      timer = Timer.gen(:with_session, :offset => '')
+      timer.display_time.should =~ /UTC/
+    end
   end
 
   context 'created_at timezone' do

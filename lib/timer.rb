@@ -41,7 +41,8 @@ class Timer
     else
       created_at.strftime('%l:%M%p on %m/%d')
     end
-    time.gsub(/(AM|PM)/,'\1 UTC') unless offset
+    time.gsub!(/(AM|PM)/,'\1 UTC') if offset.nil? || offset.empty?
+    time
   end
 
   def timer=(type)
