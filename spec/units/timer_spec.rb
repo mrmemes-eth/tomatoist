@@ -27,6 +27,10 @@ describe Timer do
     timer.to_js.should == [2009,3,1,16,20,0]
   end
 
+  it "defaults the offset to '0'" do
+    Timer.gen(:with_session).offset.should == '0'
+  end
+
   context "displaying times" do
     it 'should show not show month & day if timer was created today' do
        timer = Timer.gen(:with_session)
@@ -45,8 +49,8 @@ describe Timer do
       timer = Timer.gen(:with_session)
       timer.display_time.should =~ /UTC/
     end
-    it "notes that it's UTC if the offset is blank" do
-      timer = Timer.gen(:with_session, :offset => '')
+    it "notes that it's UTC if the offset is '0'" do
+      timer = Timer.gen(:with_session, :offset => '0')
       timer.display_time.should =~ /UTC/
     end
   end

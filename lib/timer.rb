@@ -7,7 +7,7 @@ class Timer
   property :id, Serial
   property :duration, Integer
   property :created_at, Time
-  property :offset, String
+  property :offset, String, :default => '0'
 
   belongs_to :session
 
@@ -36,13 +36,17 @@ class Timer
   end
 
   def display_time
-    time = if created_at.day == Time.now.utc.day
-      created_at.strftime('%l:%M%p').gsub(/^\s+/,'')
+    time = if created_today?
+      created_at.strftime('%l:%M%p')
     else
       created_at.strftime('%l:%M%p on %m/%d')
     end
-    time.gsub!(/(AM|PM)/,'\1 UTC') if offset.nil? || offset.empty?
-    time
+    time.gsub!(/^\s+/,'')
+    offset == '0' ? time.gsub!(/(AM|PM)/,'\1 UTC') : time
+  end
+
+  def created_today?
+    created_at.day == Time.now.utc.day
   end
 
   def timer=(type)
