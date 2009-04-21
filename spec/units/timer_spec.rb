@@ -30,12 +30,20 @@ describe Timer do
   context "displaying times" do
     it 'should show not show month & day if timer was created today' do
        timer = Timer.gen(:with_session)
-       timer.display_time.should_not =~ /at/
+       timer.display_time.should_not =~ /on/
     end
     it 'should show month & day if timer was not created today' do
        timer = Timer.gen(:with_session)
        timer.stub!(:created_at).and_return(Time.now - 60 * 60 * 24)
-       timer.display_time.should =~ /at/
+       timer.display_time.should =~ /on/
+    end
+    it "does not specify the time zone when there's an offset" do
+      timer = Timer.gen(:with_session, :offset => '-4')
+      timer.display_time.should_not =~ /UTC/
+    end
+    it "notes that it's UTC if there's no offset" do
+      timer = Timer.gen(:with_session)
+      timer.display_time.should =~ /UTC/
     end
   end
 

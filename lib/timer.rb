@@ -36,11 +36,12 @@ class Timer
   end
 
   def display_time
-    if created_at.day == Time.now.utc.day
+    time = if created_at.day == Time.now.utc.day
       created_at.strftime('%l:%M%p').gsub(/^\s+/,'')
     else
-      created_at.strftime('%m/%d at %l:%M%p')
+      created_at.strftime('%l:%M%p on %m/%d')
     end
+    time.gsub(/(AM|PM)/,'\1 UTC') unless offset
   end
 
   def timer=(type)
