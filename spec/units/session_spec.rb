@@ -13,25 +13,8 @@ describe Session do
     Session.create.name.should =~ /\w{2,}/
   end
 
-  it "should retrieve a session by name" do
-    @session = Session.gen(:name => "voxdolo")
-    Session.first(:name => "voxdolo").should == @session
-  end
-
-  it "finds the last generated name" do
-    Session.gen
-    Session.gen
-    Session.last.name.should == "ab"
-  end
-
-  it "retrieves a session by it's generated name" do
-    session = Session.gen
-    Session.retrieve(session.name).should == session
-  end
-
-  it "retrieves a session by it's custom name" do
-    session = Session.gen(:custom => "voxdolo")
-    Session.retrieve(session.custom).should == session
+  it "suggests the next session name" do
+    Session.next_name.should be_kind_of(String)
   end
 
   it "has timers" do
@@ -41,13 +24,33 @@ describe Session do
 
   context "when returning a session name" do
     it "defaults to the session name" do
-      session = Session.gen(:name => "af")
-      session.name.should == "af"
+      session = Session.gen
+      session.display_name.should == session.name
     end
     it "yields the custom name when it's present" do
       session = Session.gen(:custom => "voxdolo")
-      session.name.should == "voxdolo"
+      session.display_name.should == session.custom
     end
   end
+
+  it "retrieves the most recently created Session" do
+    Session.gen
+    Session.gen
+    session = Session.gen
+    Session.last.should == session
+  end
+
+  context "retrieving a session" do
+    it "by it's generated name succeeds" do
+      session = Session.gen
+      Session.retrieve(session.name).should == session
+    end
+
+    it "by it's custom name succeeds" do
+      session = Session.gen(:custom => "voxdolo")
+      Session.retrieve(session.custom).should == session
+    end
+  end
+
 end
 

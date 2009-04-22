@@ -6,16 +6,15 @@ describe 'Ding' do
   context "a PUT to /:session" do
     before do
       @session = Session.gen(:name => "af")
+      Session.stub!(:retrieve).and_return(@session)
     end
 
     it "should rename the Session" do
       put '/af', :custom => "voxdolo"
-      @session.reload
       Session.retrieve("voxdolo").should == @session
     end
 
     it "should redirect to the session path after creation" do
-      Session.stub!(:retrieve).and_return(@session)
       put '/af', :custom => 'voxdolo'
       response.headers['Location'].should == "/#{@session.custom}"
     end

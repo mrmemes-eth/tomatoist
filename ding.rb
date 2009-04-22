@@ -8,7 +8,7 @@ helpers do
     "/"
   end
   def session_path(session)
-    "/#{session.name}"
+    "/#{session.display_name}"
   end
   def session_timers_path(session)
     "#{session_path(session)}/timers"

@@ -9,20 +9,27 @@ class Session
 
   before :create, :generate_name
 
-  def name
-    custom || attribute_get(:name)
-  end
-
-  def generate_name
-    self.name ||= (Session.last ? Session.last.name : 'z').succ!
-  end
-
   def self.last
     first(:order => [:id.desc])
   end
 
-  def self.retrieve(name)
-    first(:conditions => [ 'name = ? or custom = ?' , name, name])
+  def self.retrieve(session)
+    first(:conditions => [ 'name = ? or custom = ?' , session, session])
   end
+
+  def display_name
+    custom || name
+  end
+
+  protected
+
+  def generate_name
+    self.name = Session.next_name
+  end
+
+  def self.next_name
+    (last ? last.name : 'z').succ!
+  end
+
 end
 
