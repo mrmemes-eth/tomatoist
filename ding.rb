@@ -13,6 +13,9 @@ helpers do
   def session_timers_path(session)
     "#{session_path(session)}/timers"
   end
+  def timer
+    @timer ||= @session.last_timer
+  end
 end
 
 get '/' do
