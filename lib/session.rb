@@ -21,6 +21,10 @@ class Session
     custom || name
   end
 
+  def last_timer
+    timers.first(:order => [:created_at.desc])
+  end
+
   protected
 
   def generate_name

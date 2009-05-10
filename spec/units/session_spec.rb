@@ -40,6 +40,13 @@ describe Session do
     Session.last.should == session
   end
 
+  it "retrieves the most recently created timer" do
+    session = Session.gen(:timerless)
+    Timer.gen(:session => session)
+    timer = Timer.gen(:session => session)
+    session.last_timer.should == timer
+  end
+
   context "retrieving a session" do
     it "by it's generated name succeeds" do
       session = Session.gen
