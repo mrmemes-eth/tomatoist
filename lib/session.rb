@@ -21,6 +21,12 @@ class Session
     custom || name
   end
 
+  def custom=(name)
+    name.gsub!(/\s/,'_')
+    name.gsub!(/[\W]/,'')
+    attribute_set(:custom,name.downcase)
+  end
+
   def last_timer
     timers.first(:order => [:created_at.desc])
   end

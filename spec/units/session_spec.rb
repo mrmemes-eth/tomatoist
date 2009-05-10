@@ -33,6 +33,25 @@ describe Session do
     end
   end
 
+  context "setting the custom name" do
+    it "does not alter 'safe' names" do
+      session = Session.gen(:custom => 'voxdolo')
+      session.custom.should == 'voxdolo'
+    end
+    it "replaces spaces with underscores" do
+      session = Session.gen(:custom => 'voxdolo rawks')
+      session.custom.should == 'voxdolo_rawks'
+    end
+    it "removes non-word characters with" do
+      session = Session.gen(:custom => 'voxdolo rawks')
+      session.custom.should == 'voxdolo_rawks'
+    end
+    it "'cleanses' unsafe names" do
+      session = Session.gen(:custom => 'voxdolo is Mr. Awesome! Yeah!!!')
+      session.custom.should == 'voxdolo_is_mr_awesome_yeah'
+    end
+  end
+
   it "retrieves the most recently created Session" do
     Session.gen
     Session.gen
