@@ -17,14 +17,14 @@ class Session
     first(:conditions => [ 'name = ? or custom = ?' , session, session])
   end
 
-  def display_name
-    custom || name
-  end
-
   def custom=(name)
     name.gsub!(/\s/,'_')
     name.gsub!(/[\W]/,'')
     attribute_set(:custom,name.downcase)
+  end
+
+  def display_name
+    custom || name
   end
 
   def last_timer
