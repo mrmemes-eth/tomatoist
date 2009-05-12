@@ -9,3 +9,6 @@ Timer.fix(:with_session){{
   :duration => 25*60,
   :session => Session.gen(:timerless)
 }}
+Pomodoro.fix {{}}
+ShortBreak.fix {{}}
+LongBreak.fix {{}}
