@@ -76,34 +76,6 @@ describe Timer do
     end
   end
 
-  context 'creating named timers' do
-    it 'creates a short timer' do
-      Timer.new(:timer => 'short').duration.should == 5*60
-    end
-
-    it 'creates a long timer' do
-      Timer.new(:timer => 'long').duration.should == 15*60
-    end
-
-    it 'creates a pomodoro timer' do
-      Timer.new(:timer => 'pomo').duration.should == 25*60
-    end
-  end
-
-  context 'retrieving a timers name' do
-    it 'identifies a short timer' do
-      Timer.gen(:duration => 5*60).name.should == 'Short Break'
-    end
-
-    it 'identifies a long timer' do
-      Timer.gen(:duration => 15*60).name.should == 'Long Break'
-    end
-
-    it 'identifies a short timer' do
-      Timer.gen(:duration => 25*60).name.should == 'Pomodoro'
-    end
-  end
-
   context 'retrieving timers by type' do
     before do
       Timer.all.destroy!
@@ -122,6 +94,42 @@ describe Timer do
     it 'finds timers of the LongBreak subtype' do
       LongBreak.gen
       Timer.all.map{|t| t.class}.should include(LongBreak)
+    end
+  end
+
+  context 'retrieving descendant class' do
+    subject do
+      Timer.new
+    end
+
+    it 'returns Timer for invalid types' do
+      subject.send(:get_descendant_class, 'Kernel').should == Timer
+    end
+
+    it 'returns Pomodoro for "Pomodoro"' do
+      subject.send(:get_descendant_class, 'Kernel').should == Timer
+    end
+
+    it 'returns ShortBreak for "ShortBreak"' do
+      subject.send(:get_descendant_class, 'Kernel').should == Timer
+    end
+
+    it 'returns LongBreak for "LongBreak"' do
+      subject.send(:get_descendant_class, 'Kernel').should == Timer
+    end
+  end
+
+  context 'instantiates timers by type' do
+    it 'creates timers of the Pomodoro subtype' do
+      Timer.new(:type => 'Pomodoro').type.should == Pomodoro
+    end
+
+    it 'creates timers of the ShortBreak subtype' do
+      Timer.new(:type => 'ShortBreak').type.should == ShortBreak
+    end
+
+    it 'creates timers of the LongBreak subtype' do
+      Timer.new(:type => 'LongBreak').type.should == LongBreak
     end
   end
 end

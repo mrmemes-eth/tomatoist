@@ -4,15 +4,15 @@
   %input#long{ :value => "rename", :type => "submit" }
 #timer_buttons
   %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'timer', :value => 'pomo'}
+    %input{:type => 'hidden', :name => 'type', :value => 'Pomodoro'}
     %input{:type => 'hidden', :name => 'offset', :value => '0'}
     %input#pomodoro{ :value => "pomodoro", :type => "submit" }
   %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'timer', :value => 'short'}
+    %input{:type => 'hidden', :name => 'type', :value => 'ShortBreak'}
     %input{:type => 'hidden', :name => 'offset', :value => '0'}
     %input#short{ :value => "short", :type => "submit" }
   %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'timer', :value => 'long'}
+    %input{:type => 'hidden', :name => 'type', :value => 'LongBreak'}
     %input{:type => 'hidden', :name => 'offset', :value => '0'}
     %input#long{ :value => "long", :type => "submit" }
 

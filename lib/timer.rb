@@ -18,20 +18,15 @@ class Timer
     self.created_at = Time.now.utc if new_record?
   end
 
-  MAPPINGS = {
-    'short' => {:duration => 5*60,  :long_name => 'Short Break'},
-    'long'  => {:duration => 15*60, :long_name => 'Long Break'},
-    'pomo'  => {:duration => 25*60, :long_name => 'Pomodoro'}
-  }
-
   def self.recent
     all(:order => [:created_at.desc], :limit => 8)
   end
 
-  def timer=(type)
-    self.duration = MAPPINGS[type][:duration]
+  def type=(type)
+    descendant = get_descendant_class(type)
+    attribute_set(:type,descendant)
+    attribute_set(:duration,descendant::DURATION)
   end
-
 
   def created_at
     zone.local_to_utc(attribute_get(:created_at))
@@ -55,10 +50,6 @@ class Timer
     created_at + duration
   end
 
-  def name
-    MAPPINGS.detect{|k,v| v[:duration] == duration}.last[:long_name]
-  end
-
   def to_js
     a = expiry.to_a[0..5].reverse
     a[1] = a[1] - 1
@@ -67,6 +58,13 @@ class Timer
 
   def zone
     TZInfo::Timezone.get(offset ? "Etc/GMT#{offset}" : 'UTC')
+  end
+
+  private
+
+  def get_descendant_class(type)
+    return Timer unless %w(Pomodoro ShortBreak LongBreak).include?(type)
+    Kernel.const_get(type)
   end
 
 end

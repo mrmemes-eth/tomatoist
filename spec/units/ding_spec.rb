@@ -27,23 +27,23 @@ describe 'Ding' do
       Session.stub!(:first).and_return(@session)
     end
     it "creates a new timer with time zone offset" do
-      post '/af/timers', :timer => 'short', :offset => '-4'
+      post '/af/timers', :type => 'ShortBreak', :offset => '-4'
       @session.timers.last.offset.should == '-4'
     end
     it "creates a new short break timer" do
-      post '/af/timers', :timer => 'short'
+      post '/af/timers', :type => 'ShortBreak'
       @session.timers.any?{|t| t.duration == 5*60 }.should be_true
     end
     it "creates a new long break timer" do
-      post '/af/timers', :timer => 'long'
+      post '/af/timers', :type => 'LongBreak'
       @session.timers.any?{|t| t.duration == 15*60 }.should be_true
     end
     it "creates a new pomodoro timer" do
-      post '/af/timers', :timer => 'pomo'
+      post '/af/timers', :type => 'Pomodoro'
       @session.timers.any?{|t| t.duration == 25*60 }.should be_true
     end
     it "redirects to the session" do
-      post '/af/timers', :timer => 'pomo'
+      post '/af/timers', :type => 'Pomodoro'
       response.headers['Location'].should == "/#{@session.name}"
     end
   end
