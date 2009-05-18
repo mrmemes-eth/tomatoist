@@ -36,19 +36,23 @@ describe Timer do
        timer = Timer.gen(:with_session)
        timer.display_time.should_not =~ /on/
     end
+
     it 'should show month & day if timer was not created today' do
        timer = Timer.gen(:with_session)
        timer.stub!(:created_at).and_return(Time.now - 60 * 60 * 24)
        timer.display_time.should =~ /on/
     end
+
     it "does not specify the time zone when there's an offset" do
       timer = Timer.gen(:with_session, :offset => '-4')
       timer.display_time.should_not =~ /UTC/
     end
+
     it "notes that it's UTC if there's no offset" do
       timer = Timer.gen(:with_session)
       timer.display_time.should =~ /UTC/
     end
+
     it "notes that it's UTC if the offset is '0'" do
       timer = Timer.gen(:with_session, :offset => '0')
       timer.display_time.should =~ /UTC/
@@ -60,6 +64,7 @@ describe Timer do
       timer = Timer.gen(:with_session)
       timer.created_at.should be_utc
     end
+
     it 'converts to a tz appropriate time when an offset is given' do
       pending
       time = Time.now
@@ -75,9 +80,11 @@ describe Timer do
     it 'creates a short timer' do
       Timer.new(:timer => 'short').duration.should == 5*60
     end
+
     it 'creates a long timer' do
       Timer.new(:timer => 'long').duration.should == 15*60
     end
+
     it 'creates a pomodoro timer' do
       Timer.new(:timer => 'pomo').duration.should == 25*60
     end
@@ -87,11 +94,34 @@ describe Timer do
     it 'identifies a short timer' do
       Timer.gen(:duration => 5*60).name.should == 'Short Break'
     end
+
     it 'identifies a long timer' do
       Timer.gen(:duration => 15*60).name.should == 'Long Break'
     end
+
     it 'identifies a short timer' do
       Timer.gen(:duration => 25*60).name.should == 'Pomodoro'
+    end
+  end
+
+  context 'retrieving timers by type' do
+    before do
+      Timer.all.destroy!
+    end
+
+    it 'finds timers of the Pomodoro subtype' do
+      Pomodoro.gen
+      Timer.all.map{|t| t.class}.should include(Pomodoro)
+    end
+
+    it 'finds timers of the ShortBreak subtype' do
+      ShortBreak.gen
+      Timer.all.map{|t| t.class}.should include(ShortBreak)
+    end
+
+    it 'finds timers of the LongBreak subtype' do
+      LongBreak.gen
+      Timer.all.map{|t| t.class}.should include(LongBreak)
     end
   end
 end
