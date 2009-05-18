@@ -4,4 +4,7 @@ describe Pomodoro do
   it "defaults duration to 1500" do
     Pomodoro.gen.duration.should == 1500
   end
+  it "reports it's name" do
+    Pomodoro.gen.name.should == 'Pomodoro'
+  end
 end
