@@ -8,7 +8,7 @@ class Timer
   property :duration, Integer
   property :created_at, Time
   property :offset, String, :default => '0'
-  property :type, Discriminator
+  property :type, Discriminator, :default => Timer
 
   belongs_to :session
 
