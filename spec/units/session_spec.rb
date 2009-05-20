@@ -78,5 +78,51 @@ describe Session do
     end
   end
 
+  it "retrieves the last long timer" do
+    session = Session.gen(:timerless)
+    LongBreak.gen(:session => session)
+    long = LongBreak.gen(:session => session)
+    session.last_long.should == long
+  end
+
+  # the following is predicated upon the following scheme:
+  # pomo - short - pomo - short - pomo - short - pomo - long
+  context "suggesting the next timer's type" do
+    before do
+      @session = Session.gen(:timerless)
+    end
+    context "when there are no timers" do
+      it "recommends a Pomodoro" do
+        @session.next_timer.should == Pomodoro
+      end
+    end
+    context "when the last timer was a break" do
+      it "recommends a Pomodoro" do
+        ShortBreak.gen(:session => @session)
+        @session.next_timer.should == Pomodoro
+      end
+    end
+    context "when the last timer was not a break" do
+      before do
+        LongBreak.gen(:session => @session)
+        ShortBreak.gen(:session => @session)
+        ShortBreak.gen(:session => @session)
+      end
+      context "and there are 2 or less shorts since the last long" do
+        it "recommends a short break" do
+          Pomodoro.gen(:session => @session)
+          @session.next_timer.should == ShortBreak
+        end
+      end
+      context "and there are 3 shorts since the last long" do
+        it "recommends a long break" do
+          ShortBreak.gen(:session => @session)
+          Pomodoro.gen(:session => @session)
+          @session.next_timer.should == LongBreak
+        end
+      end
+    end
+  end
+
 end
 

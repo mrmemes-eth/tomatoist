@@ -6,8 +6,13 @@ class Session
   property :custom, String
 
   has n, :timers
+  has n, :short_breaks
+  has n, :long_breaks
+  has n, :pomodoros
 
   before :create, :generate_name
+
+  SHORTS_TIL_LONG = 3
 
   def self.last
     first(:order => [:id.desc])
@@ -29,6 +34,18 @@ class Session
 
   def last_timer
     timers.first(:order => [:created_at.desc])
+  end
+
+  def last_long
+    timers.first(:type => LongBreak, :order => [:created_at.desc])
+  end
+
+  def next_timer
+    case
+    when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)              ; Pomodoro
+    when short_breaks.count(:created_at.gt => last_long.created_at) < SHORTS_TIL_LONG  ; ShortBreak
+    when short_breaks.count(:created_at.gt => last_long.created_at) >= SHORTS_TIL_LONG ; LongBreak
+    end
   end
 
   protected
