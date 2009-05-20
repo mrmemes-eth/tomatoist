@@ -66,6 +66,12 @@ describe Session do
     session.last_timer.should == timer
   end
 
+  it "retrieves the first timer" do
+    session = Session.gen(:timerless)
+    pomodoro = Pomodoro.gen(:session => session)
+    session.first_timer.should == pomodoro
+  end
+
   context "retrieving a session" do
     it "by it's generated name succeeds" do
       session = Session.gen
@@ -85,6 +91,20 @@ describe Session do
     session.last_long.should == long
   end
 
+  context "retrieving the timer that started the set" do
+    before do
+      @session = Session.gen(:timerless)
+    end
+    it "is the last long timer when a long timer is present" do
+      long = LongBreak.gen(:session => @session)
+      @session.set_start_timer.should == long
+    end
+    it "is the first timer when there has been no long timer" do
+      pomodoro = Pomodoro.gen(:session => @session)
+      @session.set_start_timer.should == pomodoro
+    end
+  end
+
   # the following is predicated upon the following scheme:
   # pomo - short - pomo - short - pomo - short - pomo - long
   context "suggesting the next timer's type" do
@@ -94,6 +114,12 @@ describe Session do
     context "when there are no timers" do
       it "recommends a Pomodoro" do
         @session.next_timer.should == Pomodoro
+      end
+    end
+    context "when the first timer was a pomodoro" do
+      it "recommends a ShortBreak" do
+        Pomodoro.gen(:session => @session)
+        @session.next_timer.should == ShortBreak
       end
     end
     context "when the last timer was a break" do

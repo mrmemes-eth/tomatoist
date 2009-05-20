@@ -32,6 +32,10 @@ class Session
     custom || name
   end
 
+  def first_timer
+    timers.first(:order => [:created_at.asc])
+  end
+
   def last_timer
     timers.first(:order => [:created_at.desc])
   end
@@ -40,11 +44,15 @@ class Session
     timers.first(:type => LongBreak, :order => [:created_at.desc])
   end
 
+  def set_start_timer
+    last_long ? last_long : first_timer
+  end
+
   def next_timer
     case
-    when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)              ; Pomodoro
-    when short_breaks.count(:created_at.gt => last_long.created_at) < SHORTS_TIL_LONG  ; ShortBreak
-    when short_breaks.count(:created_at.gt => last_long.created_at) >= SHORTS_TIL_LONG ; LongBreak
+    when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)                    ; Pomodoro
+    when short_breaks.count(:created_at.gt => set_start_timer.created_at) < SHORTS_TIL_LONG  ; ShortBreak
+    when short_breaks.count(:created_at.gt => set_start_timer.created_at) >= SHORTS_TIL_LONG ; LongBreak
     end
   end
 

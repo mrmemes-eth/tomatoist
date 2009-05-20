@@ -16,5 +16,8 @@ DataMapper.auto_migrate!
 Sinatra::Application.set :environment, :test
 
 Spec::Runner.configure do |config|
+  before do
+    [Session,Timer].each{|klass| klass.all.destroy!}
+  end
 end
 
