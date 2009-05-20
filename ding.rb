@@ -16,6 +16,9 @@ helpers do
   def timer
     @timer ||= @session.last_timer
   end
+  def next_timer
+    @next_timer ||= @session.next_timer
+  end
 end
 
 get '/' do

@@ -4,7 +4,15 @@ body{ font: 2em "Georgia", serif; text-align:center; }
 .countdown_section{ float:left; margin:1em; }
 #timer{overflow:auto}
 #timer_buttons form{display:inline;}
-#rename{position:absolute;right:.5em;top:0em;}
+#secondary-content{
+  position:absolute;
+  width:250px;
+  right:.5em;
+  top:0em;
+}
+#secondary-content p{
+  font-size:0.45em;
+}
 #history small{font-size:.5em}
 #history ul{
   text-align:left;

@@ -1,7 +1,14 @@
-%form#rename{:action => session_path(@session), :method => :post}
-  %input{:type => 'text', :name => 'custom'}
-  %input{:type => 'hidden', :name => '_method', :value => 'put'}
-  %input#long{ :value => "rename", :type => "submit" }
+#secondary-content
+  %form#rename{:action => session_path(@session), :method => :post}
+    %input{:type => 'text', :name => 'custom'}
+    %input{:type => 'hidden', :name => '_method', :value => 'put'}
+    %input#long{ :value => "rename", :type => "submit" }
+  %p looks like your next timer should be a...
+  %form{:action => session_timers_path(@session), :method => :post}
+    %input{:type => 'hidden', :name => 'type', :value => "#{next_timer.to_s}"}
+    %input{:type => 'hidden', :name => 'offset', :value => '0'}
+    %input{ :value => "#{next_timer.to_s.downcase}", :type => "submit" }
+
 #timer_buttons
   %form{:action => session_timers_path(@session), :method => :post}
     %input{:type => 'hidden', :name => 'type', :value => 'Pomodoro'}
@@ -16,7 +23,8 @@
     %input{:type => 'hidden', :name => 'offset', :value => '0'}
     %input#long{ :value => "long", :type => "submit" }
 
-%p.status No time like the present
+%p.status No timer like the present
+
 #timer
 #history
   %p Timer History
