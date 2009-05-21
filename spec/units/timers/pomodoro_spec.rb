@@ -5,6 +5,6 @@ describe Pomodoro do
     Pomodoro.gen.duration.should == 1500
   end
   it "reports it's name" do
-    Pomodoro.gen.name.should == 'Pomodoro'
+    Pomodoro.label.should == 'Pomodoro'
   end
 end

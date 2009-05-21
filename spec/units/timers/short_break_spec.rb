@@ -5,6 +5,6 @@ describe ShortBreak do
     ShortBreak.gen.duration.should == 300
   end
   it "reports it's name" do
-    ShortBreak.gen.name.should == 'Short Break'
+    ShortBreak.label.should == 'Short Break'
   end
 end
