@@ -3,11 +3,15 @@ class ShortBreak < Timer
 
   property :duration, Integer, :default => DURATION
 
-  def created_at
-    zone.local_to_utc(attribute_get(:created_at))
+  def self.label
+    'Short Break'
   end
 
-  def name
-    'Short Break'
+  def self.nick
+    'short'
+  end
+
+  def created_at
+    zone.local_to_utc(attribute_get(:created_at))
   end
 end

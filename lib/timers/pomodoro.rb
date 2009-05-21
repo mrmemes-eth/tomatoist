@@ -3,11 +3,15 @@ class Pomodoro < Timer
 
   property :duration, Integer, :default => DURATION
 
-  def created_at
-    zone.local_to_utc(attribute_get(:created_at))
+  def self.label
+    'Pomodoro'
   end
 
-  def name
-    'Pomodoro'
+  def self.nick
+    'pomo'
+  end
+
+  def created_at
+    zone.local_to_utc(attribute_get(:created_at))
   end
 end

@@ -4,25 +4,10 @@
     %input{:type => 'text', :name => 'custom', :value => @session.display_name }
     %input{:type => 'hidden', :name => '_method', :value => 'put'}
     %input#long{ :value => "rename", :type => "submit" }
-  %p looks like your next timer should be a...
-  %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'type', :value => "#{next_timer.to_s}"}
-    %input{:type => 'hidden', :name => 'offset', :value => '0'}
-    %input{ :value => "#{next_timer.to_s.downcase}", :type => "submit" }
 
 #timer_buttons
-  %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'type', :value => 'Pomodoro'}
-    %input{:type => 'hidden', :name => 'offset', :value => '0'}
-    %input#pomodoro{ :value => "pomodoro", :type => "submit" }
-  %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'type', :value => 'ShortBreak'}
-    %input{:type => 'hidden', :name => 'offset', :value => '0'}
-    %input#short{ :value => "short", :type => "submit" }
-  %form{:action => session_timers_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => 'type', :value => 'LongBreak'}
-    %input{:type => 'hidden', :name => 'offset', :value => '0'}
-    %input#long{ :value => "long", :type => "submit" }
+  - [Pomodoro,ShortBreak,LongBreak].each do |type|
+    = haml(:form, {:layout => false}, {:type => type})
 
 %p.status No timer like the present
 
@@ -31,5 +16,5 @@
   %p Timer History
   %ul
     - @session.timers.recent.each do |timer|
-      %li== #{timer.name} <small>(#{timer.display_time})</small>
+      %li== #{timer.class.label} <small>(#{timer.display_time})</small>
 

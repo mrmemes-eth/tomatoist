@@ -15,7 +15,7 @@
     - if timer
       :javascript
         $(document).ready(function(){
-          #{"tickTock('#{timer.name}',#{timer.to_js.join(",")});" if timer}
+          tickTock('#{timer.class.label}',#{timer.to_js.join(",")});
         });
     %link{ :rel => 'stylesheet', :href => '/css/pomodoro.css', :type => 'text/css' }
     %title= @title || 'Pomodoro!'

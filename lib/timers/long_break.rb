@@ -3,11 +3,15 @@ class LongBreak < Timer
 
   property :duration, Integer, :default => DURATION
 
-  def created_at
-    zone.local_to_utc(attribute_get(:created_at))
+  def self.label
+    'Long Break'
   end
 
-  def name
-    'Long Break'
+  def self.nick
+    'long'
+  end
+
+  def created_at
+    zone.local_to_utc(attribute_get(:created_at))
   end
 end
