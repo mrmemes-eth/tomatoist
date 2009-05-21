@@ -19,6 +19,9 @@ helpers do
   def next_timer
     @next_timer ||= @session.next_timer
   end
+  def new_timer_class(session,type)
+    session.next_timer == type ? 'next' : nil
+  end
 end
 
 get '/' do

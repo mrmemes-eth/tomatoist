@@ -7,7 +7,7 @@
 
 #timer_buttons
   - [Pomodoro,ShortBreak,LongBreak].each do |type|
-    = haml(:form, {:layout => false}, {:type => type})
+    = haml(:form, {:layout => false}, {:session => @session, :type => type})
 
 %p.status No timer like the present
 
