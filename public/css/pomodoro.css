@@ -16,7 +16,8 @@ body{
 .countdown_section{ float:left; margin:1em; }
 
 #timer{ overflow:auto; }
-#timer_buttons form{ display:inline; }
+#timer_buttons form{ display:inline; padding:0 5px 18px 10px; }
+#timer_buttons form.next{background:url(/imgs/next.png) 50% 100% no-repeat}
 
 #history small{ font-size:.9em; }
 #history ul{
