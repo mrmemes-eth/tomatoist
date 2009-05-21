@@ -23,7 +23,8 @@ function tickTock(name,year,month,day,hour,minute,second){
     onExpiry: function(){
       document.title = 'DING!';
       $('p.status').text(name + " completed!");
-      $('body').css('background-color','#C01000');
+      $('body').css('background-color','#e61717');
+      $('body').css('color','#f69c9c')
       soundManager.play('ding','/sounds/ding.mp3');
     },
     onStart: function(){

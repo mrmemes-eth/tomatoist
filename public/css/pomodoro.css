@@ -1,24 +1,37 @@
-body{ font: 2em "Georgia", serif; text-align:center; }
-.countdown_row{ width: 11.3em; white-space: nowrap; margin:0 auto; text-align:left; }
+body{
+  text-align:center;
+  font:24px/1.231 "Georgia", serif;
+  color: #524343;
+}
+
+.countdown_row{
+  font-size:2.5em;
+  color:#130a02;
+  width: 11.3em;
+  white-space: nowrap;
+  margin:0 auto;
+  text-align:left;
+}
 .countdown_amount{ font-size:3em; }
 .countdown_section{ float:left; margin:1em; }
-#timer{overflow:auto}
-#timer_buttons form{display:inline;}
-#secondary-content{
-  position:absolute;
-  width:250px;
-  right:.5em;
-  top:0em;
-}
-#secondary-content p{
-  font-size:0.45em;
-}
-#history small{font-size:.5em}
+
+#timer{ overflow:auto; }
+#timer_buttons form{ display:inline; }
+
+#history small{ font-size:.9em; }
 #history ul{
   text-align:left;
   width:350px;
   margin:0 auto;
 }
-#history ul li{list-style:none;}
+#history ul li{ list-style:none; }
 
+#secondary-content{
+  position:absolute;
+  width:300px;
+  right:0.25em;
+  top:0.5em;
+}
+form#rename{ font-size:0.6em; }
+form#rename input[type=text]{ width: 60px; }
 

@@ -1,6 +1,7 @@
 #secondary-content
   %form#rename{:action => session_path(@session), :method => :post}
-    %input{:type => 'text', :name => 'custom'}
+    %label== http://#{request.env['HTTP_HOST']}/
+    %input{:type => 'text', :name => 'custom', :value => @session.display_name }
     %input{:type => 'hidden', :name => '_method', :value => 'put'}
     %input#long{ :value => "rename", :type => "submit" }
   %p looks like your next timer should be a...
