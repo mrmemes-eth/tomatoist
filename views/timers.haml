@@ -15,6 +15,6 @@
 #history
   %p Timer History
   %ul
-    - @session.timers.recent.each do |timer|
+    - @session.timers(:order => [:created_at.desc]).recent.each do |timer|
       %li== #{timer.class.label} <small>(#{timer.display_time})</small>
 
