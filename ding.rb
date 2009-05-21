@@ -25,7 +25,7 @@ get '/' do
   redirect session_path(Session.create)
 end
 
-get '/:session' do
+get '/:session/?' do
   @session = Session.retrieve(params[:session])
   redirect root_path unless @session
   haml :timers

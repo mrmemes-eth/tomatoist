@@ -2,10 +2,10 @@
 %html
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %script{ :src => "js/jquery.js", :type => "text/javascript" }
-    %script{ :src => "js/jquery.countdown.js", :type => "text/javascript" }
-    %script{ :src => "js/soundmanager2.js", :type => "text/javascript" }
-    %script{ :src => "js/pomodoro.js", :type => "text/javascript" }
+    %script{ :src => "/js/jquery.js", :type => "text/javascript" }
+    %script{ :src => "/js/jquery.countdown.js", :type => "text/javascript" }
+    %script{ :src => "/js/soundmanager2.js", :type => "text/javascript" }
+    %script{ :src => "/js/pomodoro.js", :type => "text/javascript" }
     :javascript
       $(document).ready(function(){
         $("input[type=hidden][name=offset]").each(function() {
@@ -17,7 +17,7 @@
         $(document).ready(function(){
           #{"tickTock('#{timer.name}',#{timer.to_js.join(",")});" if timer}
         });
-    %link{ :rel => 'stylesheet', :href => 'css/pomodoro.css', :type => 'text/css' }
+    %link{ :rel => 'stylesheet', :href => '/css/pomodoro.css', :type => 'text/css' }
     %title= @title || 'Pomodoro!'
   %body
     = yield

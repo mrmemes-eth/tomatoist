@@ -36,9 +36,6 @@ function tickTock(name,year,month,day,hour,minute,second){
   if($('#timer div').size() == 0) {
     $('#timer').countdown(settings);
   } else {
-    if(document.title != 'DING!'){
-      if(!confirm('are you sure you want to change this timer?')) return;
-    }
     $('#timer').countdown('change', settings);
   }
 }
