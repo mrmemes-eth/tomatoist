@@ -1,22 +1,20 @@
 require File.join(File.dirname(__FILE__), '..', 'helper')
 
 describe 'Ding' do
-  include Sinatra::Test
-
   context "a PUT to /:session" do
     before do
-      @session = Session.gen(:name => "af")
+      @session = Session.gen
       Session.stub!(:retrieve).and_return(@session)
     end
 
     it "should rename the Session" do
-      put '/af', :custom => "voxdolo"
+      put "/#{@session.name}", :custom => "voxdolo"
       Session.retrieve("voxdolo").should == @session
     end
 
     it "should redirect to the session path after creation" do
-      put '/af', :custom => 'voxdolo'
-      response.headers['Location'].should == "/#{@session.custom}"
+      put "/#{@session.name}", :custom => 'voxdolo'
+      redirected_to.should == "/#{@session.custom}"
     end
 
   end
@@ -44,7 +42,7 @@ describe 'Ding' do
     end
     it "redirects to the session" do
       post '/af/timers', :type => 'Pomodoro'
-      response.headers['Location'].should == "/#{@session.name}"
+      redirected_to.should == "/#{@session.name}"
     end
   end
 
@@ -56,7 +54,7 @@ describe 'Ding' do
 
     it "redirects you to a new session" do
       get '/'
-      response.headers['Location'].should == "/#{@session.name}"
+      redirected_to.should == "/#{@session.name}"
     end
   end
 
@@ -68,7 +66,7 @@ describe 'Ding' do
     it "redirects to root when specified session does not exist" do
       Session.stub!(:retrieve).and_return(nil)
       get '/whateva'
-      response.headers['Location'].should == "/"
+      redirected_to.should == "/"
     end
 
     it "retrieves the specified session" do
