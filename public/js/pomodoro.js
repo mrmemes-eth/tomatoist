@@ -23,14 +23,13 @@ function tickTock(name,year,month,day,hour,minute,second){
     onExpiry: function(){
       document.title = 'DING!';
       $('p.status').text(name + " completed!");
-      $('body').css('background-color','#e61717');
-      $('body').css('color','#f69c9c')
+      $('body').addClass('expired');
       soundManager.play('ding','/sounds/ding.mp3');
     },
     onStart: function(){
       document.title = name + ' in progress';
       $('p.status').text(name + ' in progress');
-      $('body').css('background-color','#fff');
+      $('body').removeClass('expired');
     }
   }
   if($('#timer div').size() == 0) {
