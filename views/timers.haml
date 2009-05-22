@@ -4,6 +4,8 @@
     %input{:type => 'text', :name => 'custom', :value => @session.display_name }
     %input{:type => 'hidden', :name => '_method', :value => 'put'}
     %input#long{ :value => "rename", :type => "submit" }
+  %p
+    %a{:href => '/faq'} What's this all about?
 
 #timer_buttons
   - [Pomodoro,ShortBreak,LongBreak].each do |type|

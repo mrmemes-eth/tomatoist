@@ -16,6 +16,7 @@ class Ding < Sinatra::Default
       "#{session_path(session)}/timers"
     end
     def timer
+      return nil unless @session
       @timer ||= @session.last_timer
     end
     def next_timer
@@ -28,6 +29,10 @@ class Ding < Sinatra::Default
 
   get '/' do
     redirect session_path(Session.create)
+  end
+
+  get '/faq' do
+    haml(:faq)
   end
 
   get '/:session/?' do
