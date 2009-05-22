@@ -5,6 +5,8 @@ require 'haml'
 require 'environment'
 
 class Ding < Sinatra::Default
+  enable :raise_errors
+
   helpers do
     def root_path
       "/"
