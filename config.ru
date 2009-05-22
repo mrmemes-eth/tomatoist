@@ -3,6 +3,6 @@ require 'sinatra'
 
 require 'ding'
 
-Ding.set(:environment, :production)
+Ding.set(:environment, (ENV['RACK_ENV'] || :development))
 run Ding
 
