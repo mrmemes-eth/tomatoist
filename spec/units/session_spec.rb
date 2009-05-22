@@ -22,6 +22,18 @@ describe Session do
     session.timers.all?{|t| t.kind_of?(Timer) }.should be_true
   end
 
+  context "validating the custom name" do
+    it "requires it to be unique" do
+      Session.gen(:custom => 'foo')
+      Session.gen(:custom => 'foo').errors.keys.should include(:custom)
+    end
+    it "doesn't validate if it's blank" do
+      # nil custom name, successive would trigger unique guard
+      Session.gen
+      Session.gen.errors.should be_empty
+    end
+  end
+
   context "when returning a session name" do
     it "defaults to the session name" do
       session = Session.gen
