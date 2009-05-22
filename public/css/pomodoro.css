@@ -37,7 +37,7 @@ p.status{ margin-top:1.5em; }
   font-size:0.6em;
 }
 form#rename input[type=text]{ width: 60px; }
-dl#faq{ text-align:left; }
+dl#faq{ text-align:left; font-size:0.75em; }
 dl#faq dt{ font-weight:bold; }
 dl#faq dd{ margin-left:0.5em; }
 

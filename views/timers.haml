@@ -5,7 +5,7 @@
     %input{:type => 'hidden', :name => '_method', :value => 'put'}
     %input#long{ :value => "rename", :type => "submit" }
   %p
-    %a{:href => '/faq'} What's this all about?
+    %a{:href => '/faq', :rel => 'facebox'} What's this all about?
 
 #timer_buttons
   - [Pomodoro,ShortBreak,LongBreak].each do |type|

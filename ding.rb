@@ -34,7 +34,7 @@ class Ding < Sinatra::Default
   end
 
   get '/faq' do
-    haml(:faq)
+    haml(:faq, :layout => false)
   end
 
   get '/:session/?' do
