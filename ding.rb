@@ -39,7 +39,7 @@ class Ding < Sinatra::Default
   put '/:session' do
     session = Session.retrieve(params[:session])
     session.update_attributes(:custom => params[:custom])
-    redirect session_path(session)
+    redirect session_path(session.reload)
   end
 
   post '/:session/timers' do
