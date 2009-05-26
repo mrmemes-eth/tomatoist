@@ -46,9 +46,11 @@ p.status{ margin-top:1.5em; }
   font-size:0.6em;
 }
 form#rename input[type=text]{ width: 60px; }
-dl#faq{ text-align:left; font-size:0.75em; }
-dl#faq dt{ font-weight:bold; }
-dl#faq dd{ margin-left:0.5em; }
+#facebox dl#faq{ text-align:left; font-size:0.75em; color: #524343; }
+#facebox dl#faq dt{ font-weight:bold; }
+#facebox dl#faq dd{ margin-left:0.5em; }
+#facebox a{ color: #e61717; }
+#facebox a:visited{ color: #7b0404; }
 
 #twitter{ text-align:left; }
 #twitter h2{ text-align:center; font-size:1.2em; margin:0.25em; }
