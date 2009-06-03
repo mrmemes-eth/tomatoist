@@ -43,6 +43,13 @@ class Ding < Sinatra::Default
     haml :timers
   end
 
+  get '/:session/status.js/?' do
+    @session = Session.retrieve(params[:session])
+    if @session && (timer = @session.last_timer)
+      {:expired => timer.expired?}.to_json
+    end
+  end
+
   put '/:session' do
     session = Session.retrieve(params[:session])
     session.update_attributes(:custom => params[:custom])
