@@ -44,8 +44,8 @@ class Ding < Sinatra::Default
   end
 
   get '/:session/status.js/?' do
-    @session = Session.retrieve(params[:session])
-    if @session && (timer = @session.last_timer)
+    session = Session.retrieve(params[:session])
+    if session && (timer = session.last_timer)
       {:expired => timer.expired?}.to_json
     end
   end
