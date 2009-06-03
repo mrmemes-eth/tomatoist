@@ -1,0 +1,24 @@
+Setup
+===========================
+
+Install Gems
+-------
+sinatra
+datamapper
+do_sqlite
+tzinfo
+rack_hoptoad
+dm-sweatshop
+
+Database
+---------
+rake db:migrate
+
+Test
+---------
+rake spec
+
+Server
+---------
+rackup
+visit http://localhost:9292
