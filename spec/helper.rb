@@ -31,7 +31,7 @@ Spec::Runner.configure do |config|
   end
 
   def status
-    last_response.status
+    ResponseStatus.new last_response.status
   end
 
   def redirected_to
@@ -39,3 +39,18 @@ Spec::Runner.configure do |config|
   end
 end
 
+class ResponseStatus
+  attr_reader :code
+
+  def initialize(code)
+    @code = code
+  end
+
+  def success?
+    code == 200
+  end
+
+  def redirect?
+    (300..399).include? code
+  end
+end
