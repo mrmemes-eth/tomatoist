@@ -31,6 +31,13 @@ describe Timer do
     Timer.gen(:with_session).offset.should == '0'
   end
 
+  it 'returns the current time utilizing timezone' do
+    timer = Timer.new
+    Time.stub!(:now => stub(:now, :utc => 123))
+    timer.zone.should_receive(:local_to_utc).with(123)
+    timer.send(:now)
+  end
+
   context "displaying times" do
     it 'should show not show month & day if timer was created today' do
        timer = Timer.gen(:with_session)
@@ -56,6 +63,22 @@ describe Timer do
     it "notes that it's UTC if the offset is '0'" do
       timer = Timer.gen(:with_session, :offset => '0')
       timer.display_time.should =~ /UTC/
+    end
+  end
+
+  context 'expired timer' do
+    it 'has expired' do
+      timer = Timer.new
+      timer.stub!(:expiry => (Time.now - 60))
+      timer.stub!(:now => Time.now)
+      timer.should be_expired
+    end
+
+    it 'has not expired' do
+      timer = Timer.new
+      timer.stub!(:expiry => (Time.now + 60))
+      timer.stub!(:now => Time.now)
+      timer.should_not be_expired
     end
   end
 

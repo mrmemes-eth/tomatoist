@@ -50,6 +50,10 @@ class Timer
     created_at + duration
   end
 
+  def expired?
+    expiry.to_i < now.to_i
+  end
+
   def to_js
     a = expiry.to_a[0..5].reverse
     a[1] = a[1] - 1
@@ -61,6 +65,10 @@ class Timer
   end
 
   private
+
+  def now
+    zone.local_to_utc(Time.now.utc)
+  end
 
   def get_descendant_class(type)
     return Timer unless %w(Pomodoro ShortBreak LongBreak).include?(type)
