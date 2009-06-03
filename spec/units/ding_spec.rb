@@ -85,5 +85,32 @@ describe 'Ding' do
       get '/foobar'
     end
   end
+
+  context "a GET to '/:session/status.js'" do
+    before do
+      @session = Session.gen
+    end
+
+    it "does nothing when specified session does not exist" do
+      Session.stub!(:retrieve).and_return(nil)
+      get '/whateva/status.js'
+      status.should be_success
+    end
+
+    context "retrieves the specified session" do
+      it 'does nothing when there is no last timer' do
+        Session.stub!(:retrieve => stub(:last_timer => nil))
+        get '/foobar/status.js'
+        status.should be_success
+      end
+
+      it 'responds with json' do
+        timer = stub(:expired? => true)
+        Session.stub!(:retrieve => stub(:last_timer => timer))
+        get '/foobar/status.js'
+        JSON.parse(body)['expired'].should be_true
+      end
+    end
+  end
 end
 
