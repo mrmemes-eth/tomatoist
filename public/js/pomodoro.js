@@ -17,6 +17,24 @@ function setTimezoneOffset(elem){
   $(elem).attr("value", (new Date).getTimezoneOffset()/-60);
 }
 
+var Polling = new function() {
+  var polling;
+  var url = [window.location.href, "status.js"].join("/");
+
+  this.start = function() {
+    polling = window.setInterval(this.resync, 10000);
+  };
+
+  this.resync = function() {
+    $.getJSON(url, function(timer) {
+      if (! timer.expired) {
+        clearInterval(polling);
+        window.location.reload();
+      }
+    });
+  };
+};
+
 function tickTock(name,year,month,day,hour,minute,second){
   settings = {
     until: new Date(year,month,day,hour,minute,second),
@@ -25,6 +43,7 @@ function tickTock(name,year,month,day,hour,minute,second){
       $('p.status').text(name + " completed!");
       $('body').addClass('expired');
       soundManager.play('ding','/sounds/ding.mp3');
+      Polling.start();
     },
     onStart: function(){
       document.title = name + ' in progress';
