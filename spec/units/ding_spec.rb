@@ -91,17 +91,17 @@ describe 'Ding' do
       @session = Session.gen
     end
 
-    it "does nothing when specified session does not exist" do
+    it "has an empty body when the session does not exist" do
       Session.stub!(:retrieve).and_return(nil)
       get '/whateva/status.js'
-      status.should be_success
+      body.should be_empty
     end
 
     context "retrieves the specified session" do
-      it 'does nothing when there is no last timer' do
+      it 'has an empty body when there is no last timer' do
         Session.stub!(:retrieve => stub(:last_timer => nil))
         get '/foobar/status.js'
-        status.should be_success
+        body.should be_empty
       end
 
       it 'responds with json' do

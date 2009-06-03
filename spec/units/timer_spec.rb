@@ -66,19 +66,22 @@ describe Timer do
     end
   end
 
-  context 'expired timer' do
-    it 'has expired' do
-      timer = Timer.new
-      timer.stub!(:expiry => (Time.now - 60))
-      timer.stub!(:now => Time.now)
-      timer.should be_expired
+  context "reporting it's expiry status" do
+    context 'when it has exipred' do
+      it 'says true' do
+        timer = Timer.new
+        timer.stub!(:expiry => (Time.now - 60))
+        timer.stub!(:now => Time.now)
+        timer.should be_expired
+      end
     end
-
-    it 'has not expired' do
-      timer = Timer.new
-      timer.stub!(:expiry => (Time.now + 60))
-      timer.stub!(:now => Time.now)
-      timer.should_not be_expired
+    context 'when it has not exipred' do
+      it 'says false' do
+        timer = Timer.new
+        timer.stub!(:expiry => (Time.now + 60))
+        timer.stub!(:now => Time.now)
+        timer.should_not be_expired
+      end
     end
   end
 
