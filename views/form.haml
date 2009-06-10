@@ -1,4 +1,4 @@
-%form{:action => session_timers_path(session), :method => :post, :class => new_timer_class(session,type)}
+%form{:action => session_timers_path(session), :method => :post, :class => new_timer_class(session,type), :id => type.nick.split(//)[0]}
   %input{:type => 'hidden', :name => 'type', :value => type}
   %input{:type => 'hidden', :name => 'offset', :value => '0'}
   %input{:id => type.nick, :value => type.label, :type => 'submit'}
