@@ -9,6 +9,9 @@ do_sqlite
 tzinfo
 rack_hoptoad
 dm-sweatshop
+json_pure
+rack-test
+haml
 
 Database
 ---------
