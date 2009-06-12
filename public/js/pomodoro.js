@@ -1,3 +1,10 @@
+String.prototype.lpad = function(padString, length) {
+  var str = this;
+  while (str.length < length)
+    str = padString + str;
+  return str;
+}
+
 $.countdown.setDefaults({alwaysExpire: true, format: 'MS'})
 soundManager.url = 'swf/'
 
@@ -65,6 +72,9 @@ function tickTock(name,year,month,day,hour,minute,second){
       document.title = name + ' in progress';
       $('p.status').text(name + ' in progress');
       $('body').removeClass('expired');
+    },
+    onTick: function(time) {
+      document.title = name + ' (' + time[5] + ':' + time[6].toString().lpad('0',2) + ')';
     }
   }
   if($('#timer div').size() == 0) {
@@ -73,4 +83,3 @@ function tickTock(name,year,month,day,hour,minute,second){
     $('#timer').countdown('change', settings);
   }
 }
-
