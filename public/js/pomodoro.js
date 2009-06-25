@@ -9,7 +9,7 @@ $.countdown.setDefaults({alwaysExpire: true, format: 'MS'})
 soundManager.url = 'swf/'
 
 var isCtrl = false;
-var ctrlKey = 18;
+var ctrlKey = 17;
 var pKey = 80;
 var sKey = 83;
 var lKey = 76;
