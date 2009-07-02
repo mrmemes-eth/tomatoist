@@ -160,6 +160,19 @@ describe Session do
         end
       end
     end
+    it "recommends a short break after a full cycle and a long" do
+      Pomodoro.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      Pomodoro.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      Pomodoro.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      Pomodoro.gen(:session => @session)
+      LongBreak.gen(:session => @session)
+      Pomodoro.gen(:session => @session)
+      @session.next_timer.should == ShortBreak
+    end
+  end
 
   context "counting the number of short breaks since a long break" do
     before do
