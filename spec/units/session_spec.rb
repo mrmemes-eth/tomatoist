@@ -160,6 +160,45 @@ describe Session do
         end
       end
     end
+
+  context "counting the number of short breaks since a long break" do
+    before do
+      @session = Session.gen(:timerless)
+    end
+    it "Reports 0 when there are none" do
+      @session.current_short_breaks_count.should == 0
+    end
+    it "Reports 1 when there is 1" do
+      ShortBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 1
+    end
+    it "Reports 2 when there is 2" do
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 2
+    end
+    it "Reports 3 when there is 3" do
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 3
+    end
+    it "Reports 4 when there is 4" do
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 4
+    end
+    it "Reports 0 after a long break" do
+      LongBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 0
+    end
+    it "Reports 1 when there is 1 short after a long" do
+      LongBreak.gen(:session => @session)
+      ShortBreak.gen(:session => @session)
+      @session.current_short_breaks_count.should == 1
+    end
   end
 
 end

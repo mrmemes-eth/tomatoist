@@ -50,6 +50,10 @@ class Session
     last_long ? last_long : first_timer
   end
 
+  def current_short_breaks_count
+    short_breaks.count(:id.gte => set_start_timer.id)
+  end
+
   def next_timer
     case
     when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)                    ; Pomodoro
