@@ -103,17 +103,17 @@ describe Session do
     session.last_long.should == long
   end
 
-  context "retrieving the timer that started the set" do
+  context "retrieving the timer that started the pomodoro iteration" do
     before do
       @session = Session.gen(:timerless)
     end
     it "is the last long timer when a long timer is present" do
       long = LongBreak.gen(:session => @session)
-      @session.set_start_timer.should == long
+      @session.iteration_start_timer.should == long
     end
     it "is the first timer when there has been no long timer" do
       pomodoro = Pomodoro.gen(:session => @session)
-      @session.set_start_timer.should == pomodoro
+      @session.iteration_start_timer.should == pomodoro
     end
   end
 
@@ -179,38 +179,38 @@ describe Session do
       @session = Session.gen(:timerless)
     end
     it "Reports 0 when there are none" do
-      @session.current_short_breaks_count.should == 0
+      @session.iteration_short_breaks_count.should == 0
     end
     it "Reports 1 when there is 1" do
       ShortBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 1
+      @session.iteration_short_breaks_count.should == 1
     end
     it "Reports 2 when there is 2" do
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 2
+      @session.iteration_short_breaks_count.should == 2
     end
     it "Reports 3 when there is 3" do
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 3
+      @session.iteration_short_breaks_count.should == 3
     end
     it "Reports 4 when there is 4" do
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 4
+      @session.iteration_short_breaks_count.should == 4
     end
     it "Reports 0 after a long break" do
       LongBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 0
+      @session.iteration_short_breaks_count.should == 0
     end
     it "Reports 1 when there is 1 short after a long" do
       LongBreak.gen(:session => @session)
       ShortBreak.gen(:session => @session)
-      @session.current_short_breaks_count.should == 1
+      @session.iteration_short_breaks_count.should == 1
     end
   end
 

@@ -46,20 +46,20 @@ class Session
     timers.first(:type => LongBreak, :order => [:id.desc])
   end
 
-  def set_start_timer
+  def iteration_start_timer
     last_long ? last_long : first_timer
   end
 
-  def current_short_breaks_count
-    short_breaks.count(:id.gte => set_start_timer.id)
+  def iteration_short_breaks_count
+    short_breaks.count(:id.gte => iteration_start_timer.id)
   end
 
   def next_timer
     case
     when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)
       Pomodoro
-    when current_short_breaks_count < SHORTS_TIL_LONG  ; ShortBreak
-    when current_short_breaks_count >= SHORTS_TIL_LONG ; LongBreak
+    when iteration_short_breaks_count < SHORTS_TIL_LONG  ; ShortBreak
+    when iteration_short_breaks_count >= SHORTS_TIL_LONG ; LongBreak
     end
   end
 
