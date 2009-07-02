@@ -69,7 +69,9 @@ function tickTock(name,year,month,day,hour,minute,second){
       document.title = 'DING!';
       $('p.status').text(name + " completed!");
       $('body').addClass('expired');
-      soundManager.play('ding','/sounds/ding.mp3');
+      soundManager.onload = function(){
+        soundManager.play('ding','/sounds/ding.mp3');
+      }
       Polling.start();
     },
     onStart: function(){
