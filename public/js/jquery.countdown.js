@@ -78,12 +78,12 @@ $.extend(Countdown.prototype, {
     inst._periods = [0, 0, 0, 0, 0, 0, 0];
     this._adjustSettings(inst);
     $.data(target[0], PROP_NAME, inst);
-    this._updateCountdown(target, inst);
     /* call our onStart callback since the timer is just initialized */
     var onStart = this._get(inst, 'onStart');
     if (onStart) {
       onStart.apply(target[0],[]);
     }
+    this._updateCountdown(target, inst);
   },
 
   /* Redisplay the countdown with an updated display.
