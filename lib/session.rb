@@ -63,6 +63,14 @@ class Session
     end
   end
 
+  def status
+    if timers.empty? || last_timer.expired?
+      'No timer like the present'
+    else
+      "#{last_timer.label} in progress"
+    end
+  end
+
   protected
 
   def generate_name
