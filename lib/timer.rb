@@ -54,6 +54,10 @@ class Timer
     expiry.to_i < now.to_i
   end
 
+  def label
+    self.class.label
+  end
+
   def to_js
     a = expiry.to_a[0..5].reverse
     a[1] = a[1] - 1
