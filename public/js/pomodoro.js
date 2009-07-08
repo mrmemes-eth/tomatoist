@@ -5,8 +5,7 @@ String.prototype.lpad = function(padString, length) {
   return str;
 }
 
-$.countdown.setDefaults({alwaysExpire: true, format: 'MS'})
-soundManager.url = 'swf/'
+soundManager.url = 'swf/';
 
 var isCtrl = false;
 var ctrlKey = 17;
@@ -63,7 +62,9 @@ var Polling = new function() {
 };
 
 function tickTock(name,year,month,day,hour,minute,second){
-  settings = {
+  $('#timer').countdown({
+    alwaysExpire: true,
+    format: 'MS',
     until: new Date(year,month,day,hour,minute,second),
     onExpiry: function(){
       document.title = 'DING!';
@@ -74,18 +75,8 @@ function tickTock(name,year,month,day,hour,minute,second){
       }
       Polling.start();
     },
-    onStart: function(){
-      document.title = name + ' in progress';
-      $('p.status').text(name + ' in progress');
-      $('body').removeClass('expired');
-    },
     onTick: function(time) {
       document.title = name + ' (' + time[5] + ':' + time[6].toString().lpad('0',2) + ')';
     }
-  }
-  if($('#timer div').size() == 0) {
-    $('#timer').countdown(settings);
-  } else {
-    $('#timer').countdown('change', settings);
-  }
+  });
 }
