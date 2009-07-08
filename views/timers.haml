@@ -12,7 +12,7 @@
   - [Pomodoro,ShortBreak,LongBreak].each do |type|
     = haml(:form, {:layout => false}, {:session => @session, :type => type})
 
-%p.status No timer like the present
+%p.status= @session.status
 
 #timer
 #history
