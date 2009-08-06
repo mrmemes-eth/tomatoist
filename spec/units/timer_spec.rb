@@ -158,5 +158,30 @@ describe Timer do
       Timer.new(:type => 'LongBreak').type.should == LongBreak
     end
   end
+
+  context '#offset' do
+    it "returns '0' when the offset is 0" do
+      Timer.new(:offset => '0').offset.should == '0'
+    end
+    it 'returns a string prefaced with a + for positive integers' do
+      Timer.new(:offset => '8').offset.should == '+8'
+    end
+    it 'returns a string prefaced with a + for explicitly marked positive integers' do
+      Timer.new(:offset => '+4').offset.should == '+4'
+    end
+    it 'returns a string prefaced with a - for negative integers' do
+      Timer.new(:offset => '-1').offset.should == '-1'
+    end
+  end
+
+  context '#zone' do
+    it 'should not raise an exception for valid timezones' do
+      (-12..12).each do |offset|
+        lambda do
+          Timer.new(:offset => offset).zone
+        end.should_not raise_error
+      end
+    end
+  end
 end
 

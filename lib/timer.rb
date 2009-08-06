@@ -58,6 +58,10 @@ class Timer
     self.class.label
   end
 
+  def offset
+    attribute_get(:offset).to_i.to_s.gsub(/^([1-9][0-2]?)$/,'+\1')
+  end
+
   def to_js
     a = expiry.to_a[0..5].reverse
     a[1] = a[1] - 1
