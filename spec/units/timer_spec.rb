@@ -133,15 +133,15 @@ describe Timer do
     end
 
     it 'returns Pomodoro for "Pomodoro"' do
-      subject.send(:get_descendant_class, 'Kernel').should == Timer
+      subject.send(:get_descendant_class, 'Pomodoro').should == Pomodoro
     end
 
     it 'returns ShortBreak for "ShortBreak"' do
-      subject.send(:get_descendant_class, 'Kernel').should == Timer
+      subject.send(:get_descendant_class, 'ShortBreak').should == ShortBreak
     end
 
     it 'returns LongBreak for "LongBreak"' do
-      subject.send(:get_descendant_class, 'Kernel').should == Timer
+      subject.send(:get_descendant_class, 'LongBreak').should == LongBreak
     end
   end
 
