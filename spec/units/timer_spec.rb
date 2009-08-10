@@ -159,17 +159,17 @@ describe Timer do
     end
   end
 
-  context '#offset' do
-    it "returns '0' when the offset is 0" do
+  context '#offset=' do
+    it "sets '0' when the offset is 0" do
       Timer.new(:offset => '0').offset.should == '0'
     end
-    it 'returns a string prefaced with a + for positive integers' do
+    it 'sets a string prefaced with a + for positive integers' do
       Timer.new(:offset => '8').offset.should == '+8'
     end
-    it 'returns a string prefaced with a + for explicitly marked positive integers' do
+    it 'sets a string prefaced with a + for explicitly marked positive integers' do
       Timer.new(:offset => '+4').offset.should == '+4'
     end
-    it 'returns a string prefaced with a - for negative integers' do
+    it 'sets a string prefaced with a - for negative integers' do
       Timer.new(:offset => '-1').offset.should == '-1'
     end
   end

@@ -58,8 +58,8 @@ class Timer
     self.class.label
   end
 
-  def offset
-    attribute_get(:offset).to_i.to_s.gsub(/^([1-9][0-2]?)$/,'+\1')
+  def offset=(offset)
+    attribute_set(:offset, offset.to_i.to_s.gsub(/^([1-9][0-2]?)$/,'+\1'))
   end
 
   def to_js
