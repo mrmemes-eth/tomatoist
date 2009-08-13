@@ -3,6 +3,6 @@
 irb = RUBY_PLATFORM =~ /(:?mswin|mingw)/ ? 'irb.bat' : 'irb'
 
 libs = " -r irb/completion"
-libs << " -r ding.rb"
+libs << " -r config/environment"
 exec "#{irb} #{libs} --simple-prompt"
 
