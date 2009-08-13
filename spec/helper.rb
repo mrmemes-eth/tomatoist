@@ -6,7 +6,7 @@ require 'rack/test'
 
 require 'dm-sweatshop'
 
-require 'ding'
+require 'lib/ding'
 
 require File.join(File.dirname(__FILE__),'fixtures')
 

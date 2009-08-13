@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'spec/rake/spectask'
 
-require 'environment'
+require 'config/environment'
 
 task :default => :spec
 

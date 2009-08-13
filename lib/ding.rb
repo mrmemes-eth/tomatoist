@@ -2,7 +2,7 @@ require 'rubygems'
 require 'sinatra/base'
 require 'haml'
 
-require 'environment'
+require 'config/environment'
 
 class Ding < Sinatra::Default
   enable :raise_errors

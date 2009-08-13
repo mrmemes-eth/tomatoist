@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 
-require 'ding'
+require 'lib/ding'
 require 'rack_hoptoad'
 
 use Rack::HoptoadNotifier, '276a4c0a1715e7a29f976677bee2beff'
