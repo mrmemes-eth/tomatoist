@@ -64,7 +64,7 @@ class Timer
 
   def to_js
     a = expiry.to_a[0..5].reverse
-    a[1] = a[1] - 1
+    a[1] = a[1] - 1 # JavaScript wants months to be 0 based
     a
   end
 
