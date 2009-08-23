@@ -1,2 +1,2 @@
 :development: "mysql://root@localhost/ding_development"
-:production: <%= ENV['DATABASE_URL'] %>
+:test: "sqlite3::memory:"

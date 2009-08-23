@@ -9,5 +9,5 @@ Dir.glob(File.join(config_dir,'..','lib','**','*.rb')) do |file|
   require file
 end
 
-DataMapper.setup(:default, database_hash[Ding.environment])
+DataMapper.setup(:default, ENV['DATABASE_URL'] || database_hash[Ding.environment])
 
