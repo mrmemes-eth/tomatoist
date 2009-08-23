@@ -56,6 +56,12 @@ class Ding < Sinatra::Default
     redirect session_path(session.reload)
   end
 
+  put '/:session/reset' do
+    session = Session.retrieve(params[:session])
+    session.reset!
+    redirect session_path(session.reload)
+  end
+
   post '/:session/timers' do
     session = Session.retrieve(params[:session])
     session.timers.create(:type => params[:type], :offset => params[:offset])

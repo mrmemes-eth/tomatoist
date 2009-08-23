@@ -27,7 +27,21 @@ describe 'Ding' do
         redirected_to.should == "/#{@session.name}"
       end
     end
+  end
 
+  context "a PUT to /:session/reset" do
+    before do
+      @session = Session.gen
+      Session.stub!(:retrieve).and_return(@session)
+    end
+    it "should reset the session" do
+      @session.should_receive(:reset!)
+      put "/#{@session.name}/reset"
+    end
+    it "redirects to the current sessions path" do
+      put "/#{@session.name}/reset"
+      redirected_to.should == "/#{@session.name}"
+    end
   end
 
   context "a POST to /:session/timers" do
