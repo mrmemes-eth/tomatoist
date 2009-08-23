@@ -88,14 +88,8 @@ describe 'Ding' do
       @session = Session.gen
     end
 
-    it "redirects to root when specified session does not exist" do
-      Session.stub!(:retrieve).and_return(nil)
-      get '/whateva'
-      redirected_to.should == "/"
-    end
-
     it "retrieves the specified session" do
-      Session.should_receive(:retrieve).with('foobar')
+      Session.should_receive(:retrieve).with('foobar').and_return(@session)
       get '/foobar'
     end
   end
