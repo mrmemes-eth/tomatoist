@@ -18,6 +18,10 @@ class Timer
     self.created_at = Time.now.utc if new_record?
   end
 
+  def self.label
+    'Timer'
+  end
+
   def self.recent
     all(:order => [:created_at.desc], :limit => 8)
   end

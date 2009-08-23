@@ -21,7 +21,7 @@ class Session
   end
 
   def self.retrieve(session)
-    first(:conditions => [ 'name = ? or custom = ?' , session, session])
+    first(:conditions => [ 'name = ? or custom = ?' , session, session]) || create(:custom => session)
   end
 
   def custom=(name)

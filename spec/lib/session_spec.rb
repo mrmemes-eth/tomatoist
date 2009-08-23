@@ -94,6 +94,12 @@ describe Session do
       session = Session.gen(:custom => "voxdolo")
       Session.retrieve(session.custom).should == session
     end
+
+    it "by a nonexistant custom name creates a session with that custom name" do
+      lambda do
+        Session.retrieve('whatchmacallit')
+      end.should change(Session, :count).by(1)
+    end
   end
 
   it "retrieves the last long timer" do
