@@ -14,6 +14,9 @@ class Ding < Sinatra::Default
     def session_path(session)
       "/#{session.display_name}"
     end
+    def session_reset_path(session)
+      "/#{session.display_name}/reset"
+    end
     def session_timers_path(session)
       "#{session_path(session)}/timers"
     end

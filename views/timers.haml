@@ -9,6 +9,9 @@
   #twitter
 
 #timer_buttons
+  %form#reset{:action => session_reset_path(@session), :method => :post}
+    %input{:type => 'hidden', :name => '_method', :value => 'put'}
+    %input#long{ :value => "Reset Your Timers", :type => "submit" }
   - [Pomodoro,ShortBreak,LongBreak].each do |type|
     = haml(:form, {:layout => false}, {:session => @session, :type => type})
 
