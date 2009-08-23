@@ -34,4 +34,4 @@
     %title= @title || 'Pomodoro!'
   %body
     = yield
-    = erb(:ga, :layout => false)
+    = erb(:ga, :layout => false) unless Ding.environment == :development
