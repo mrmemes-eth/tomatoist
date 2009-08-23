@@ -214,5 +214,14 @@ describe Session do
     end
   end
 
+  describe "#reset!" do
+    it "destroys all of a sessions timers" do
+      session = Session.gen
+      session.timers.should_not be_empty
+      session.reset!
+      session.timers.should be_empty
+    end
+  end
+
 end
 

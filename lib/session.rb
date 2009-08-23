@@ -63,6 +63,10 @@ class Session
     end
   end
 
+  def reset!
+    timers.all.destroy!
+  end
+
   def status
     if timers.empty? || last_timer.expired?
       'No timer like the present'
