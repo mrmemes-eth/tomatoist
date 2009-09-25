@@ -120,5 +120,25 @@ describe 'Ding' do
       end
     end
   end
+
+  describe "#timer_class" do
+    before(:each) do
+      @session = Session.gen(:timerless)
+      @pomo    = Pomodoro.gen(:session => @session)
+      @long    = LongBreak.gen(:session => @session)
+    end
+
+    it "returns next when type is the same as the next timer" do
+      timer_class(@session,Pomodoro).should == 'next'
+    end
+
+    it "returns current when type is the same as the current timer" do
+      timer_class(@session,LongBreak).should == 'current'
+    end
+
+    it "returns nil elsewise" do
+      timer_class(@session,ShortBreak).should be_nil
+    end
+  end
 end
 

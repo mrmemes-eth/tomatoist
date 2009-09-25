@@ -18,6 +18,7 @@ Ding.set(:environment, :test)
 Spec::Runner.configure do |config|
   include Rack::Test::Methods
 
+  config.include DingHelpers
   config.before do
     [Session,Timer].each{|klass| klass.all.destroy! }
   end
