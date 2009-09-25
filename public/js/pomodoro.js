@@ -65,6 +65,7 @@ function tickTock(name,year,month,day,hour,minute,second){
   $('#timer').countdown({
     alwaysExpire: true,
     format: 'MS',
+    compact: true,
     until: new Date(year,month,day,hour,minute,second),
     onExpiry: function(){
       document.title = 'DING!';
@@ -73,6 +74,7 @@ function tickTock(name,year,month,day,hour,minute,second){
       soundManager.play('ding', '/sounds/ding.mp3');
       Polling.start();
     },
+
     onTick: function(time) {
       document.title = name + ' (' + time[5] + ':' + time[6].toString().lpad('0',2) + ')';
     }
