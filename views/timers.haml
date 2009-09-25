@@ -1,26 +1,25 @@
-#secondary-content
+#primary_controls
+  %form#reset{:action => session_reset_path(@session), :method => :post}
+    %input{:type => 'hidden', :name => '_method', :value => 'put'}
+    %input{ :value => "Reset Your Timers", :type => "submit" }
+  #timer_buttons
+    - [Pomodoro,ShortBreak,LongBreak].each do |type|
+      = haml(:form, {:layout => false}, {:session => @session, :type => type})
   %form#rename{:action => session_path(@session), :method => :post}
     %label== http://#{request.env['HTTP_HOST']}/
     %input{:type => 'text', :name => 'custom', :value => @session.display_name }
     %input{:type => 'hidden', :name => '_method', :value => 'put'}
-    %input#long{ :value => "rename", :type => "submit" }
-  %p
-    %a{:href => '/faq', :rel => 'facebox'} What's this all about?
-  #twitter
-
-#timer_buttons
-  %form#reset{:action => session_reset_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => '_method', :value => 'put'}
-    %input#long{ :value => "Reset Your Timers", :type => "submit" }
-  - [Pomodoro,ShortBreak,LongBreak].each do |type|
-    = haml(:form, {:layout => false}, {:session => @session, :type => type})
-
-%p.status= @session.status
+    %input{ :value => "rename", :type => "submit" }
 
 #timer
+  .countdown_row.countdown_amount 00:00
 #history
   %h2 Timer History
   %ul
     - @session.timers(:order => [:created_at.desc]).recent.each do |timer|
       %li== #{timer.class.label} <span class="time">(#{timer.display_time})</span>
 
+#footer
+  #twitter
+  %p
+    %a{:href => '/faq', :rel => 'facebox'} What's this all about?

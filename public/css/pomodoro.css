@@ -1,5 +1,3 @@
-/* @override http://localhost:9292/css/pomodoro.css */
-
 /* @group Reset */
 
 html, body, div, span, applet, object, iframe,
@@ -29,6 +27,7 @@ body {
   line-height: 1;
   color: black;
   background: white;
+  min-width: 880px;
 }
 
 ol, ul {
@@ -63,25 +62,11 @@ body {
 }
 
 a {
-  color: #e61717;
+  color: #005f80;
 }
 
 a:visited {
   color: #7b0404;
-}
-
-body.expired p.status {
-  background-color: #b10000;
-  background-position: 0 -512px;
-  color: white;
-}
-
-body.expired a {
-  color: #fff;
-}
-
-body.expired a:visited {
-  color: #f6c59c;
 }
 
 .countdown_amount {
@@ -91,42 +76,49 @@ body.expired a:visited {
   position: relative;
 }
 
-p.status {
-  background: lightgoldenrodyellow url(images/black-overlays.png);
-  background-position: 0 -512px;
-  border-bottom: 1px solid #e5bc45;
-  font-size: 0.75em;
-  padding: 1em 0;
-  color: #652900;
-}
-
 /* @group Timer Buttons */
 
-#timer_buttons form {
+#primary_controls form {
   display: inline-block;
   margin: 0;
   margin-right: -0.33em;
 }
 
-div#timer_buttons {
+div#primary_controls{
   background: url(images/white-overlays.png) #444;
   background-position: 0 -128px;
   border-top: 1px solid #999;
   border-bottom: 1px solid #303030;
 }
 
-body.expired #timer_buttons form.next input[type="submit"] {
-  /*bac
-
-kground:url(/imgs/tomato_tiny.png) 50% 100% no-repeat;*/
-        background-color: #0a6e00;
+body.expired #primary_controls form.next input[type="submit"] {
+  background-color: #0a6e00;
   border-bottom-color: #083e03;
   border-right: 1px solid rgba(0, 0, 0, 0.33);
   border-left: 1px solid rgba(255,255,255,0.2);
   text-shadow: #0e5706 0 -1px 0;
 }
 
-div#timer_buttons input[type="submit"] {
+body.expired #primary_controls form.current input[type="submit"] {
+  background-color: #650b00;
+  border-bottom-color: #3e0303;
+  border-right: 1px solid rgba(0, 0, 0, 0.33);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  text-shadow: #400404 0 -1px 0;
+  color: white;
+}
+
+body #primary_controls form.current input[type="submit"] {
+  background-color: #cca200;
+  background-position: 0 -384px;
+  border-bottom-color: #534002;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  text-shadow: #c9bd7e 0 1px 0;
+  color: #322319;
+}
+
+div#primary_controls input[type="submit"] {
   border: none;
   background: #262626 url(images/white-overlays.png);
   border-right: 1px solid rgba(0, 0, 0, 0.125);
@@ -139,18 +131,71 @@ div#timer_buttons input[type="submit"] {
   font-weight: bold;
 }
 
-div#timer_buttons input#pomo {
+div#primary_controls input#pomo {
   -webkit-border-top-left-radius: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
+  -moz-border-radius-topleft: 0.5em;
+  -moz-border-radius-bottomleft: 0.5em;
+
 }
 
-div#timer_buttons input#long {
+div#primary_controls input#long {
   -webkit-border-top-right-radius: 0.5em;
   -webkit-border-bottom-right-radius: 0.5em;
+  -moz-border-radius-topright: 0.5em;
+  -moz-border-radius-bottomright: 0.5em;
 }
 
-div#timer_buttons input[type="submit"]:hover {
+div#primary_controls #reset {
+  position: absolute;
+  left: 0.5em;
+  top: 1px;
+}
+
+div#primary_controls #reset input {
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+}
+
+div#primary_controls input[type="submit"]:hover {
   background-color: #333;
+}
+
+div#primary_controls form#rename{
+  position: absolute;
+  right: 1em;
+  top: 0.33em;
+  color: #aaa;
+  font-size: 0.85em;
+  margin: 0;
+}
+
+div#primary_controls form#rename label, div#primary_controls form#rename input[type=text]{
+  font-size: 0.8em;
+  font-family: Inconsolata, Monaco, "Courier New", Courier, mono;
+  letter-spacing: -0.1em;
+}
+
+div#primary_controls form#rename input[type=text]{
+  width: 7em !important;
+}
+
+div#primary_controls form#rename input[type="text"]{
+  background: #222;
+  border: none;
+  color: #888;
+  padding: 0.25em;
+  width: 10em;
+}
+
+div#primary_controls form#rename input[type="text"]:focus {
+  color: white;
+}
+
+div#primary_controls form#rename input[type="submit"]{
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  padding: 0.33em 0.75em;
 }
 
 /* @end */
@@ -200,7 +245,7 @@ div#timer_buttons input[type="submit"]:hover {
 
 #history ul {
   text-align: left;
-  width: 20em;
+  width: 25em;
   margin: 0 auto;
 }
 
@@ -230,18 +275,23 @@ div#timer_buttons input[type="submit"]:hover {
 
 /* @end */
 
-#secondary-content {
-  display: none;
+/* @group Footer */
+
+#footer{
+  width: 29.4em;
+  margin: 3em auto 0;
+  font-size: 0.85em;
+  line-height: 1.33em;
+  text-align: left;
 }
 
-form#rename input[type=text] {
-  width: 60px;
+#footer #twitter{
+  margin-bottom: 2em;
 }
 
-form#reset {
-  position: absolute;
-  left: 0.5em;
-  top: 1px;
+#twitter h2 {
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }
 
 #facebox dl#faq {
@@ -266,18 +316,10 @@ form#reset {
   color: #7b0404;
 }
 
-#twitter {
-  text-align: left;
-}
-
-#twitter h2 {
-  text-align: center;
-  font-size: 1.2em;
-  margin: 0.25em;
-}
-
 #twitter ul, #twitter li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
+/* @end */
