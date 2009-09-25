@@ -259,11 +259,15 @@ div#primary_controls form#rename input[type="submit"]{
 #history ul li:first-child {
   -webkit-border-top-left-radius: 0.5em;
   -webkit-border-top-right-radius: 0.5em;
+  -moz-border-radius-topleft: 0.5em;
+  -moz-border-radius-topright: 0.5em;
 }
 
 #history ul li:last-child {
   -webkit-border-bottom-left-radius: 0.5em;
   -webkit-border-bottom-right-radius: 0.5em;
+  -moz-border-radius-bottomleft: 0.5em;
+  -moz-border-radius-bottomright: 0.5em;
 }
 
 #history ul li span.time {
