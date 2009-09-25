@@ -129,6 +129,7 @@ div#primary_controls input[type="submit"] {
   color: #eee;
   text-shadow: 0 -1px 0 black;
   font-weight: bold;
+  cursor:pointer;
 }
 
 div#primary_controls input#pomo {
