@@ -1,64 +1,283 @@
-body{
-  text-align:center;
-  font:24px/1.231 "Georgia", serif;
+/* @override http://localhost:9292/css/pomodoro.css */
+
+/* @group Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+:focus {
+  outline: 0;
+}
+
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+
+blockquote, q {
+  quotes: "" "";
+}
+
+/* @end */
+
+body {
+  text-align: center;
+  font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+  background: #ccc;
+}
+
+a {
+  color: #e61717;
+}
+
+a:visited {
+  color: #7b0404;
+}
+
+body.expired p.status {
+  background-color: #b10000;
+  background-position: 0 -512px;
+  color: white;
+}
+
+body.expired a {
+  color: #fff;
+}
+
+body.expired a:visited {
+  color: #f6c59c;
+}
+
+.countdown_amount {
+  display: inline-block;
+  color: black;
+  font: 12em Inconsolata, Monaco, "Courier New", Courier, mono;
+  position: relative;
+}
+
+p.status {
+  background: lightgoldenrodyellow url(images/black-overlays.png);
+  background-position: 0 -512px;
+  border-bottom: 1px solid #e5bc45;
+  font-size: 0.75em;
+  padding: 1em 0;
+  color: #652900;
+}
+
+/* @group Timer Buttons */
+
+#timer_buttons form {
+  display: inline-block;
+  margin: 0;
+  margin-right: -0.33em;
+}
+
+div#timer_buttons {
+  background: url(images/white-overlays.png) #444;
+  background-position: 0 -128px;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #303030;
+}
+
+body.expired #timer_buttons form.next input[type="submit"] {
+  /*bac
+
+kground:url(/imgs/tomato_tiny.png) 50% 100% no-repeat;*/
+        background-color: #0a6e00;
+  border-bottom-color: #083e03;
+  border-right: 1px solid rgba(0, 0, 0, 0.33);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  text-shadow: #0e5706 0 -1px 0;
+}
+
+div#timer_buttons input[type="submit"] {
+  border: none;
+  background: #262626 url(images/white-overlays.png);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #111;
+  margin: 0.4em 0 0.33em;
+  padding: 0.6em 1.25em;
+  color: #eee;
+  text-shadow: 0 -1px 0 black;
+  font-weight: bold;
+}
+
+div#timer_buttons input#pomo {
+  -webkit-border-top-left-radius: 0.5em;
+  -webkit-border-bottom-left-radius: 0.5em;
+}
+
+div#timer_buttons input#long {
+  -webkit-border-top-right-radius: 0.5em;
+  -webkit-border-bottom-right-radius: 0.5em;
+}
+
+div#timer_buttons input[type="submit"]:hover {
+  background-color: #333;
+}
+
+/* @end */
+
+/* @group Timer */
+
+#timer {
+  text-align: center;
+  background: #eee;
+  padding: 1em 0;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid white;
+}
+
+#timer:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+/* @end */
+
+/* @group History */
+
+#history {
+  background: #ccc;
+  border-top: 1px solid #888;
+}
+
+#history h2 {
+  border-top: 2px solid #bbb;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: bold;
+  font-size: 0.85em;
+  padding-top: 1.5em;
+  margin-bottom: 1.25em;
+  color: #444;
+  text-shadow: 0 1px #eee;
+}
+
+#history small {
+  font-size: .9em;
+}
+
+#history ul {
+  text-align: left;
+  width: 20em;
+  margin: 0 auto;
+}
+
+#history ul li {
+  padding: 0.5em 6em 0.6em 0.5em;
+  background: #ddd;
+  margin-bottom: 1px;
+  position: relative;
+}
+
+#history ul li:first-child {
+  -webkit-border-top-left-radius: 0.5em;
+  -webkit-border-top-right-radius: 0.5em;
+}
+
+#history ul li:last-child {
+  -webkit-border-bottom-left-radius: 0.5em;
+  -webkit-border-bottom-right-radius: 0.5em;
+}
+
+#history ul li span.time {
+  position: absolute;
+  right: 0.5em;
+  top: 0.75em;
+  font-size: 0.75em;
+}
+
+/* @end */
+
+#secondary-content {
+  display: none;
+}
+
+form#rename input[type=text] {
+  width: 60px;
+}
+
+form#reset {
+  position: absolute;
+  left: 0.5em;
+  top: 1px;
+}
+
+#facebox dl#faq {
+  text-align: left;
+  font-size: 0.75em;
   color: #524343;
 }
-a{ color: #e61717; }
-a:visited{ color: #7b0404; }
 
-body.expired{
-  background-color: #e61717;
-  color: #f69c9c;
-}
-body.expired a{ color: #fff; }
-body.expired a:visited{ color: #f6c59c; }
-
-.countdown_row{
-  font-size:2.5em;
-  color:#130a02;
-  width: 11.3em;
-  white-space: nowrap;
-  margin:0 auto;
-  text-align:left;
-}
-.countdown_amount{ font-size:3em; }
-.countdown_section{ float:left; margin:1em; }
-
-p.status{ margin-top:1.5em; }
-
-#timer{ overflow:auto; }
-#timer_buttons form{ display:inline; padding:0 5px 30px 10px; }
-#timer_buttons form.next{background:url(/imgs/tomato_tiny.png) 50% 100% no-repeat}
-
-#history small{ font-size:.9em; }
-#history ul{
-  text-align:left;
-  width:350px;
-  margin:0 auto;
-}
-#history ul li{ list-style:none; }
-
-#secondary-content{
-  position:absolute;
-  width:300px;
-  right:0.25em;
-  top:0.5em;
-  font-size:0.6em;
-}
-form#rename input[type=text]{ width: 60px; }
-form#reset{
-  position:absolute;
-  top:0.35em;
-  left:0;
+#facebox dl#faq dt {
+  font-weight: bold;
 }
 
-#facebox dl#faq{ text-align:left; font-size:0.75em; color: #524343; }
-#facebox dl#faq dt{ font-weight:bold; }
-#facebox dl#faq dd{ margin-left:0.5em; }
-#facebox a{ color: #e61717; }
-#facebox a:visited{ color: #7b0404; }
+#facebox dl#faq dd {
+  margin-left: 0.5em;
+}
 
-#twitter{ text-align:left; }
-#twitter h2{ text-align:center; font-size:1.2em; margin:0.25em; }
-#twitter ul, #twitter li{ margin:0; padding:0; list-style:none; }
+#facebox a {
+  color: #e61717;
+}
 
+#facebox a:visited {
+  color: #7b0404;
+}
+
+#twitter {
+  text-align: left;
+}
+
+#twitter h2 {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 0.25em;
+}
+
+#twitter ul, #twitter li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
