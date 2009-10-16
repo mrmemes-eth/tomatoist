@@ -1,7 +1,7 @@
 class ShortBreak < Timer
-  DURATION = 5*60
-
-  property :duration, Integer, :default => DURATION
+  before :valid? do
+    self.duration = 5*60
+  end
 
   def self.label
     'Short Break'

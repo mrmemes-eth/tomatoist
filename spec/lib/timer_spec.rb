@@ -123,28 +123,6 @@ describe Timer do
     end
   end
 
-  context 'retrieving descendant class' do
-    subject do
-      Timer.new
-    end
-
-    it 'returns Timer for invalid types' do
-      subject.send(:get_descendant_class, 'Kernel').should == Timer
-    end
-
-    it 'returns Pomodoro for "Pomodoro"' do
-      subject.send(:get_descendant_class, 'Pomodoro').should == Pomodoro
-    end
-
-    it 'returns ShortBreak for "ShortBreak"' do
-      subject.send(:get_descendant_class, 'ShortBreak').should == ShortBreak
-    end
-
-    it 'returns LongBreak for "LongBreak"' do
-      subject.send(:get_descendant_class, 'LongBreak').should == LongBreak
-    end
-  end
-
   context 'instantiates timers by type' do
     it 'creates timers of the Pomodoro subtype' do
       Timer.new(:type => 'Pomodoro').type.should == Pomodoro

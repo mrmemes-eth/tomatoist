@@ -1,7 +1,7 @@
 class LongBreak < Timer
-  DURATION = 15*60
-
-  property :duration, Integer, :default => DURATION
+  before :valid? do
+    self.duration = 15*60
+  end
 
   def self.label
     'Long Break'

@@ -1,7 +1,7 @@
 class Pomodoro < Timer
-  DURATION = 25*60
-
-  property :duration, Integer, :default => DURATION
+  before :valid? do
+    self.duration = 25*60
+  end
 
   def self.label
     'Pomodoro'

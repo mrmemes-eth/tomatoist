@@ -26,12 +26,6 @@ class Timer
     all(:order => [:created_at.desc], :limit => 8)
   end
 
-  def type=(type)
-    descendant = get_descendant_class(type)
-    attribute_set(:type,descendant)
-    attribute_set(:duration,descendant::DURATION)
-  end
-
   def created_at
     zone.local_to_utc(attribute_get(:created_at))
   end
@@ -81,11 +75,5 @@ class Timer
   def now
     zone.local_to_utc(Time.now.utc)
   end
-
-  def get_descendant_class(type)
-    return Timer unless %w(Pomodoro ShortBreak LongBreak).include?(type)
-    Kernel.const_get(type)
-  end
-
 end
 
