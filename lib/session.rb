@@ -51,7 +51,8 @@ class Session
   end
 
   def iteration_short_breaks_count
-    short_breaks.count(:id.gte => iteration_start_timer.id)
+    return 0 unless iteration_start_timer
+    short_breaks.count(:id.gte => iteration_start_timer[:id])
   end
 
   def next_timer
