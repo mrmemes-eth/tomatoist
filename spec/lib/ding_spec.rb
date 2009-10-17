@@ -21,7 +21,7 @@ describe 'Ding' do
       before do
         Session.gen(:custom => 'voxdolo')
       end
-      it "notifies the user that the custom name is taken"
+
       it "redirects to the current sessions path" do
         put "/#{@session.name}", :custom => 'voxdolo'
         redirected_to.should == "/#{@session.name}"
