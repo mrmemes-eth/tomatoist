@@ -39,10 +39,6 @@ function pomo(period){
   }
 }
 
-function setTimezoneOffset(elem){
-  $(elem).attr("value", (new Date).getTimezoneOffset()/-60);
-}
-
 var Polling = new function() {
   var polling;
   var url = [window.location.href, "status.js"].join("/");
@@ -61,12 +57,12 @@ var Polling = new function() {
   };
 };
 
-function tickTock(name,year,month,day,hour,minute,second){
+function tickTock(name,localTime,expiryTime){
   $('#timer').countdown({
     alwaysExpire: true,
     format: 'MS',
     compact: true,
-    until: new Date(year,month,day,hour,minute,second),
+    until: new Date(Date.parse(expiryTime)),
     onExpiry: function(){
       document.title = 'DING!';
       $('p.status').text(name + " completed!");
@@ -74,7 +70,7 @@ function tickTock(name,year,month,day,hour,minute,second){
       soundManager.play('ding', '/sounds/ding.mp3');
       Polling.start();
     },
-
+    serverTime: new Date(Date.parse(localTime)),
     onTick: function(time) {
       document.title = name + ' (' + time[5] + ':' + time[6].toString().lpad('0',2) + ')';
     }

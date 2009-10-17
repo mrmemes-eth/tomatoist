@@ -10,9 +10,6 @@
     %script{ :src => '/facebox/facebox.js', :type => 'text/javascript' }
     :javascript
       $(document).ready(function(){
-        $("input[type=hidden][name=offset]").each(function() {
-          setTimezoneOffset(this);
-        });
         $('a[rel*=facebox]').facebox();
         $("#twitter").getTwitter({
           userName: "tomatoist",
@@ -27,7 +24,7 @@
     - if timer
       :javascript
         $(document).ready(function(){
-          tickTock('#{timer.class.label}',#{timer.to_js.join(",")});
+          tickTock('#{timer.class.label}','#{Time.now.to_s}','#{timer.expiry.to_s}');
         });
     %link{ :rel => 'stylesheet', :href => '/css/pomodoro.css', :type => 'text/css' }
     %link{ :rel => 'stylesheet', :href => '/facebox/facebox.css', :type => 'text/css', :media => 'screen' }

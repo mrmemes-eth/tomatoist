@@ -20,24 +20,6 @@ describe Timer do
     timer.expiry.should == time + 60*15
   end
 
-  it "yields a JS friendly timer expiry array" do
-    time = Time.parse('Wed Apr 01 16:20:00 -0400 2009')
-    timer = Timer.gen
-    timer.stub!(:expiry).and_return(time)
-    timer.to_js.should == [2009,3,1,16,20,0]
-  end
-
-  it "defaults the offset to '0'" do
-    Timer.gen(:with_session).offset.should == '0'
-  end
-
-  it 'returns the current time utilizing timezone' do
-    timer = Timer.new
-    Time.stub!(:now => stub(:now, :utc => 123))
-    timer.zone.should_receive(:local_to_utc).with(123)
-    timer.send(:now)
-  end
-
   context "displaying times" do
     it 'should show not show month & day if timer was created today' do
        timer = Timer.gen(:with_session)
@@ -48,21 +30,6 @@ describe Timer do
        timer = Timer.gen(:with_session)
        timer.stub!(:created_at).and_return(Time.now - 60 * 60 * 24)
        timer.display_time.should =~ /on/
-    end
-
-    it "does not specify the time zone when there's an offset" do
-      timer = Timer.gen(:with_session, :offset => '-4')
-      timer.display_time.should_not =~ /UTC/
-    end
-
-    it "notes that it's UTC if there's no offset" do
-      timer = Timer.gen(:with_session)
-      timer.display_time.should =~ /UTC/
-    end
-
-    it "notes that it's UTC if the offset is '0'" do
-      timer = Timer.gen(:with_session, :offset => '0')
-      timer.display_time.should =~ /UTC/
     end
   end
 
@@ -82,23 +49,6 @@ describe Timer do
         timer.stub!(:now => Time.now)
         timer.should_not be_expired
       end
-    end
-  end
-
-  context 'created_at timezone' do
-    it 'is UTC by default' do
-      timer = Timer.gen(:with_session)
-      timer.created_at.should be_utc
-    end
-
-    it 'converts to a tz appropriate time when an offset is given' do
-      pending
-      time = Time.now
-      Time.stub!(:now).and_return(time)
-      offset = Time.zone_offset(Time.now.zone)/60/60
-      timer = Timer.gen(:with_session, :offset => offset)
-      # FIXME (SC): There appears to be a phase of the moon bug here
-      (timer.created_at.to_a[2] - timer.offset.to_i).should == time.to_a[2]
     end
   end
 
@@ -134,31 +84,6 @@ describe Timer do
 
     it 'creates timers of the LongBreak subtype' do
       Timer.new(:type => 'LongBreak').type.should == LongBreak
-    end
-  end
-
-  context '#offset=' do
-    it "sets '0' when the offset is 0" do
-      Timer.new(:offset => '0').offset.should == '0'
-    end
-    it 'sets a string prefaced with a + for positive integers' do
-      Timer.new(:offset => '8').offset.should == '+8'
-    end
-    it 'sets a string prefaced with a + for explicitly marked positive integers' do
-      Timer.new(:offset => '+4').offset.should == '+4'
-    end
-    it 'sets a string prefaced with a - for negative integers' do
-      Timer.new(:offset => '-1').offset.should == '-1'
-    end
-  end
-
-  context '#zone' do
-    it 'should not raise an exception for valid timezones' do
-      (-12..12).each do |offset|
-        lambda do
-          Timer.new(:offset => offset).zone
-        end.should_not raise_error
-      end
     end
   end
 end
