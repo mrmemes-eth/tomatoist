@@ -65,7 +65,7 @@ class Session
   end
 
   def reset!
-    timers.all.destroy!
+    timers.destroy!
   end
 
   def status

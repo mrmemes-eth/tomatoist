@@ -33,7 +33,7 @@ class Ding < Sinatra::Default
 
   put '/:session' do
     session = Session.retrieve(params[:session])
-    session.update_attributes(:custom => params[:custom])
+    session.update(:custom => params[:custom])
     redirect session_path(session.reload)
   end
 

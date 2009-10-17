@@ -15,7 +15,7 @@ class Timer
   validates_present :duration, :session_id
 
   before :valid? do
-    self.created_at = Time.now.utc if new_record?
+    self.created_at = Time.now.utc if new?
   end
 
   def self.label
