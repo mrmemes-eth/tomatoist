@@ -132,7 +132,7 @@ div#primary_controls input[type="submit"] {
   cursor:pointer;
 }
 
-div#primary_controls input#pomo {
+div#primary_controls input#pomodoro {
   -webkit-border-top-left-radius: 0.5em;
   -webkit-border-bottom-left-radius: 0.5em;
   -moz-border-radius-topleft: 0.5em;

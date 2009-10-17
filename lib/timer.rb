@@ -19,7 +19,11 @@ class Timer
   end
 
   def self.label
-    'Timer'
+    name.gsub(/([a-z])([A-Z])/,'\1 \2')
+  end
+
+  def self.nick
+    label.split(/\s/).first.downcase
   end
 
   def self.recent
