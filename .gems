@@ -1,2 +1,2 @@
-sinatra --version 0.10.1
+sinatra --version 0.9.4
 rack_hoptoad
