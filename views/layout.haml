@@ -29,6 +29,6 @@
     %link{ :rel => 'stylesheet', :href => '/css/pomodoro.css', :type => 'text/css' }
     %link{ :rel => 'stylesheet', :href => '/facebox/facebox.css', :type => 'text/css', :media => 'screen' }
     %title= @title || 'Pomodoro!'
-  %body
+  %body{:class => body_class(timer)}
     = yield
     = erb(:ga, :layout => false) unless Ding.environment == :development

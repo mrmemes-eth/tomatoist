@@ -30,4 +30,8 @@ module DingHelpers
     when session.last_timer.kind_of?(type); 'current'
     end
   end
+
+  def body_class(timer)
+    'expired' if timer && timer.expired?
+  end
 end
