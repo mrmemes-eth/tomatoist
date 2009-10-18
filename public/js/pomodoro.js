@@ -1,3 +1,5 @@
+soundManager.url = 'swf/';
+
 String.prototype.lpad = function(padString, length) {
   var str = this;
   while (str.length < length)
@@ -5,70 +7,42 @@ String.prototype.lpad = function(padString, length) {
   return str;
 }
 
-soundManager.url = 'swf/';
+$(function(){
+  $('a[rel*=facebox]').facebox();
 
-var isCtrl = false;
-var ctrlKey = 17;
-var pKey = 80;
-var sKey = 83;
-var lKey = 76;
-
-$(document).keyup(function(e){
-  if(e.which == ctrlKey) isCtrl = false;
+  $("#twitter").getTwitter({
+    userName: "tomatoist",
+    numTweets: 3,
+    loaderText: "Loading tweets...",
+    slideIn: false,
+    showHeading: true,
+    headingText: "News",
+    showProfileLink: false
+  });
 });
 
-$(document).keydown(function(e){
-  // console.log(e.type,"keyCode:"+e.keyCode,"which:"+e.which,"charCode:"+String.fromCharCode(e.which));
-  if(e.which == ctrlKey) isCtrl = true;
-  if(isCtrl){
-    if($.inArray(e.keyCode, [pKey,sKey,lKey]) > -1){
-      $('#' + String.fromCharCode(e.which).toLowerCase()).submit();
-    }
-  }
-});
-
-function minToMil(minutes){
-  return 1000*60*minutes;
-}
-
-function pomo(period){
-  switch(period){
-    case 'short':    return { message:'Short break', duration:minToMil(5)  };
-    case 'long':     return { message:'Long break',  duration:minToMil(15) };
-    case 'pomodoro': return { message:'Pomodoro',    duration:minToMil(25) };
-  }
-}
-
-var Polling = new function() {
-  var polling;
-  var url = [window.location.href, "status.js"].join("/");
-
-  this.start = function() {
-    polling = window.setInterval(this.resync, 10000);
-  };
-
-  this.resync = function() {
-    $.getJSON(url, function(timer) {
-      if (! timer.expired) {
-        clearInterval(polling);
-        window.location.reload();
-      }
+function audibleAlert(){
+  if(window.fluid){
+    window.fluid.playSoundNamed("Glass");
+  } else {
+    soundManager.onready(function(){
+      soundManager.play('ding', '/sounds/ding.mp3');
     });
-  };
-};
+  }
+}
 
 function tickTock(name,localTime,expiryTime){
   $('#timer').countdown({
-    alwaysExpire: true,
     format: 'MS',
     compact: true,
     until: new Date(Date.parse(expiryTime)),
     onExpiry: function(){
       document.title = 'DING!';
-      $('p.status').text(name + " completed!");
-      $('body').addClass('expired');
-      soundManager.play('ding', '/sounds/ding.mp3');
+      modalAlert(name + ' completed!');
+      audibleAlert();
       Polling.start();
+      $('p.status').text(name + ' completed!');
+      $('body').addClass('expired');
     },
     serverTime: new Date(Date.parse(localTime)),
     onTick: function(time) {
