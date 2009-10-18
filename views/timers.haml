@@ -16,8 +16,12 @@
 #history
   %h2 Timer History
   %ul
-    - @session.timers(:order => [:created_at.desc]).recent.each do |timer|
-      %li== #{timer.class.label} <span class="time">(#{timer.display_time})</span>
+    - @session.recent_timers.each do |timer|
+      %li
+        = timer.class.label
+        %span.time
+          = distance_of_time_in_words(timer.created_at,Time.now)
+          ago
 
 #footer
   #twitter

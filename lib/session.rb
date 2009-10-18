@@ -64,6 +64,10 @@ class Session
     end
   end
 
+  def recent_timers
+    timers(:order => [:created_at.desc]).recent
+  end
+
   def reset!
     timers.destroy!
   end
