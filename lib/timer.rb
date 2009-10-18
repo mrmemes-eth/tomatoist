@@ -29,12 +29,11 @@ class Timer
   end
 
   def display_time
-    time = if created_today?
+    if created_today?
       created_at.strftime('%l:%M%p')
     else
       created_at.strftime('%l:%M%p on %m/%d')
     end
-    time.gsub!(/^\s+/,'')
   end
 
   def expiry
