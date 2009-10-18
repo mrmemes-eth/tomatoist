@@ -1,4 +1,5 @@
 soundManager.url = 'swf/';
+soundManager.debugMode = false;
 
 String.prototype.lpad = function(padString, length) {
   var str = this;
