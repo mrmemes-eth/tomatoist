@@ -47,7 +47,9 @@ function tickTock(name,localTime,expiryTime){
     },
     serverTime: new Date(Date.parse(localTime)),
     onTick: function(time) {
-      document.title = name + ' (' + time[5] + ':' + time[6].toString().lpad('0',2) + ')';
+      remainder = time[5] + ':' + time[6].toString().lpad('0',2);
+      badge(remainder);
+      document.title = name + ' (' + remainder + ')';
     }
   });
 }

@@ -28,6 +28,12 @@ $(function(){
   }
 });
 
+function badge(text) {
+  if (window.fluid) {
+    window.fluid.dockBadge = text;
+  }
+}
+
 function modalAlert(description){
   notifications.notify({
     title: "Ding!",
