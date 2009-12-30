@@ -18,7 +18,7 @@
     - if timer
       :javascript
         $(function(){
-          tickTock('#{timer.class.label}','#{(timer.expiry - Time.now).floor}');
+          tickTock('#{timer.class.label}','#{timer.remainder}');
         });
   %body{:class => body_class(timer)}
     = yield
