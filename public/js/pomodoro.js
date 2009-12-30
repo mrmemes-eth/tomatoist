@@ -32,24 +32,20 @@ function audibleAlert(){
   }
 }
 
-function tickTock(name,localTime,expiryTime){
-  $('#timer').countdown({
-    format: 'MS',
-    compact: true,
-    until: new Date(Date.parse(expiryTime)),
-    onExpiry: function(){
+function tickTock(name,time_in_seconds){
+  $("#timer .countdown_amount").createTimer({
+    time_in_seconds: time_in_seconds,
+    tick: function(timer, time_in_seconds, formatted_time) {
+      document.title = name + ' (' + formatted_time + ')';
+      badge(formatted_time);
+    },
+    buzzer: function(){
       document.title = 'DING!';
       modalAlert(name + ' completed!');
       audibleAlert();
       Polling.start();
       $('p.status').text(name + ' completed!');
       $('body').addClass('expired');
-    },
-    serverTime: new Date(Date.parse(localTime)),
-    onTick: function(time) {
-      remainder = time[5] + ':' + time[6].toString().lpad('0',2);
-      badge(remainder);
-      document.title = name + ' (' + remainder + ')';
     }
   });
 }
