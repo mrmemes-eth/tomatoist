@@ -2,9 +2,9 @@ require 'rubygems'
 require 'sinatra'
 
 require 'lib/ding'
-require 'rack_hoptoad'
+require 'rack/hoptoad'
 
-use Rack::HoptoadNotifier, '276a4c0a1715e7a29f976677bee2beff'
+use Rack::Hoptoad, '276a4c0a1715e7a29f976677bee2beff'
 
 Ding.set(:environment, (ENV['RACK_ENV'] || :development))
 run Ding
