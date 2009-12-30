@@ -86,5 +86,14 @@ describe Timer do
       Timer.new(:type => 'LongBreak').type.should == LongBreak
     end
   end
+
+  describe "#remainder" do
+    it 'returns the time remaining in the timer in seconds' do
+      Time.stub(:now).and_return(Time.parse('12/30/09 10:15:00 EST'))
+      t = Timer.gen(:session => nil)
+      t.stub(:expiry).and_return(Time.parse('12/30/09 10:15:15 EST'))
+      t.remainder.should == 15
+    end
+  end
 end
 

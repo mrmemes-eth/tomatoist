@@ -47,5 +47,9 @@ class Timer
   def label
     self.class.label
   end
+
+  def remainder
+    expiry.to_i - Time.now.to_i
+  end
 end
 
