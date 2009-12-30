@@ -44,6 +44,10 @@ class Timer
     expiry.to_i < Time.now.to_i
   end
 
+  def active?
+    expiry.to_i >= Time.now.to_i
+  end
+
   def label
     self.class.label
   end

@@ -15,7 +15,7 @@
     %script{ :src => '/facebox/facebox.js', :type => 'text/javascript' }
     %link{ :rel => 'stylesheet', :href => '/css/pomodoro.css', :type => 'text/css' }
     %link{ :rel => 'stylesheet', :href => '/facebox/facebox.css', :type => 'text/css', :media => 'screen' }
-    - if timer
+    - if timer && timer.active?
       :javascript
         $(function(){
           tickTock('#{timer.class.label}','#{timer.remainder}');
