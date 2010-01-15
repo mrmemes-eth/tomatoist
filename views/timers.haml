@@ -27,3 +27,32 @@
   #twitter
   %p
     %a{:href => '/faq', :rel => 'facebox'} What's this all about?
+#help
+  #help-container
+    #background
+    #body
+      %h3 Keyboard Shortcuts
+      %table.shortcuts
+        %tr
+          %td.left
+            Pomodoro
+          %td
+            #{escape_html "<Ctrl>"} + p
+        %tr
+          %td.left
+            Short Break
+          %td
+            #{escape_html "<Ctrl>"} + s
+        %tr
+          %td.left
+            Long Break
+          %td
+            #{escape_html "<Ctrl>"} + l
+        %tr
+          %td.left
+            Help
+          %td
+            ?
+      #close-help
+        %a.close(href="#") close
+
