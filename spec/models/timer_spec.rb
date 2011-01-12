@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '..', 'helper')
+require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Timer do
   it "populates created_at" do

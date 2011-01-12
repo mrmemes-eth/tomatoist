@@ -16,6 +16,7 @@ group :test do
   gem 'mocha', '~> 0.9.10'
   gem 'rspec', '~> 2.4.0'
   gem 'rack-test', :require => 'rack/test'
+  gem 'dm-sweatshop', '~> 1.0.2'
 end
 
 gem 'sinatra', '1.1.0'

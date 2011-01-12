@@ -5,7 +5,7 @@ class Timer
 
   property :id, Serial
   property :duration, Integer
-  property :created_at, Time
+  property :created_at, DateTime
   property :type, Discriminator
 
   belongs_to :session

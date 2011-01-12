@@ -1,7 +1,4 @@
 Tomatoist.controller do
-  def session
-    @session ||= Session.retrieve(params[:session])
-  end
 
   get '/' do
     redirect session_path(Session.create)
@@ -17,22 +14,26 @@ Tomatoist.controller do
   end
 
   get '/:session/status.js/?' do
+    session = Session.retrieve(params[:session])
     if session && (timer = session.last_timer)
       { expired: timer.expired? }.to_json
     end
   end
 
   put '/:session' do
+    session = Session.retrieve(params[:session])
     session.update(custom: params[:custom])
     redirect session_path(session.reload)
   end
 
   put '/:session/reset' do
+    session = Session.retrieve(params[:session])
     session.reset!
     redirect session_path(session.reload)
   end
 
   post '/:session/timers' do
+    session = Session.retrieve(params[:session])
     session.timers.create(type: params[:type])
     redirect session_path(session)
   end
