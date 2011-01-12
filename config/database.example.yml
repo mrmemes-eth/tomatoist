@@ -1,2 +1,0 @@
-:development: "mysql://root@localhost/ding_development"
-:test: "sqlite3::memory:"

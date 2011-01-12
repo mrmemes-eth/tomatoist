@@ -1,4 +1,4 @@
-module DingHelpers
+Tomatoist.helpers do
   def root_path
     "/"
   end

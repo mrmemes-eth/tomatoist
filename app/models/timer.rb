@@ -10,7 +10,7 @@ class Timer
 
   belongs_to :session
 
-  validates_present :duration, :session_id
+  validates_presence_of :duration, :session_id
 
   def self.label
     name.gsub(/([a-z])([A-Z])/,'\1 \2')

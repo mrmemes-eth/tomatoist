@@ -5,7 +5,7 @@ class Session
   property :name, String, :unique => true
   property :custom, String
 
-  validates_is_unique :custom, :if => lambda{|s| s.custom }
+  validates_uniqueness_of :custom, :if => lambda{|s| s.custom }
 
   has n, :timers
   has n, :short_breaks

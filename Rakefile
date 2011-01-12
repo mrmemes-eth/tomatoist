@@ -1,24 +1,21 @@
-require 'rubygems'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
-require 'config/environment'
+desc "Run specs"
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rspec_opts = %w(-fs --color)
+end
 
 task :default => :spec
 
-desc "Run specs"
-Spec::Rake::SpecTask.new do |t|
-  t.spec_files = FileList['spec/**/**/*_spec.rb']
-  t.spec_opts = %w(-fs --color)
-end
-
 namespace :db do
   desc 'Auto-migrate the database (destroys data)'
-  task :migrate do
+  task :migrate => :environment do
     DataMapper.auto_migrate!
   end
 
   desc 'Auto-upgrade the database (preserves data)'
-  task :upgrade do
+  task :upgrade => :environment do
     DataMapper.auto_upgrade!
   end
 end
