@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Pomodoro do
-  it "defaults duration to 1500" do
-    Pomodoro.gen.duration.should == 1500
-  end
+  subject { Fabricate(:pomodoro) }
+  specify { subject.duration.should == 1500 }
+
   it "reports it's name" do
     Pomodoro.label.should == 'Pomodoro'
   end

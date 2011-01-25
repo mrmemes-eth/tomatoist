@@ -1,5 +1,5 @@
 class ShortBreak < Timer
-  before :valid? do
+  set_callback(:validation, :before) do
     self.duration = 5*60
   end
 end

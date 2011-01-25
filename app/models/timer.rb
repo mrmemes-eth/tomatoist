@@ -1,16 +1,19 @@
 require 'time'
 
 class Timer
-  include DataMapper::Resource
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  property :id, Serial
-  property :duration, Integer
-  property :created_at, DateTime
-  property :type, Discriminator
+  field :duration, type: Integer
 
-  belongs_to :session
+  validates_presence_of :duration
 
-  validates_presence_of :duration, :session_id
+  embedded_in :session
+
+  scope :pomodoros, where(_type: 'Pomodoro')
+  scope :short_breaks, where(_type: 'ShortBreak')
+  scope :long_breaks, where(_type: 'LongBreak')
+  scope :recent, order_by(:created_at.desc).limit(8)
 
   def self.label
     name.gsub(/([a-z])([A-Z])/,'\1 \2')
@@ -18,10 +21,6 @@ class Timer
 
   def self.nick
     label.split(/\s/).first.downcase
-  end
-
-  def self.recent
-    all(:order => [:created_at.desc], :limit => 8)
   end
 
   def created_today?
@@ -56,4 +55,3 @@ class Timer
     expiry.to_i - Time.now.to_i
   end
 end
-

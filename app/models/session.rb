@@ -1,63 +1,46 @@
 class Session
-  include DataMapper::Resource
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  property :id, Serial
-  property :name, String, :unique => true
-  property :custom, String
+  field :name, type: String
+  field :custom, type: String
+  field :created_at, type: DateTime
+  field :updated_at, type: DateTime
 
-  validates_uniqueness_of :custom, :if => lambda{|s| s.custom }
+  validates_uniqueness_of :name
+  validates_uniqueness_of :custom, if: -> { custom.present? }
 
-  has n, :timers
-  has n, :short_breaks
-  has n, :long_breaks
-  has n, :pomodoros
+  embeds_many :timers
 
-  before :create, :generate_name
+  set_callback :create, :before, :generate_name
 
   SHORTS_TIL_LONG = 3
 
-  def self.last
-    first(:order => [:id.desc])
-  end
-
   def self.retrieve(session)
-    first(:conditions => [ 'name = ? or custom = ?' , session, session]) || create(:custom => session)
+    any_of({name: session}, {custom: session}).first || create(custom: session)
   end
 
   def custom=(name)
-    name.gsub!(/\s/,'_')
-    name.gsub!(/[\W]/,'')
-    attribute_set(:custom,name.downcase)
+    self[:custom] = sluggify(name)
   end
 
   def display_name
     custom || name
   end
 
-  def first_timer
-    timers.first(:order => [:id.asc])
-  end
-
-  def last_timer
-    timers.first(:order => [:id.desc])
-  end
-
-  def last_long
-    timers.first(:type => LongBreak, :order => [:id.desc])
-  end
-
   def iteration_start_timer
-    last_long ? last_long : first_timer
+    last_long = timers.long_breaks.last
+    last_long ? last_long : timers.first
   end
 
   def iteration_short_breaks_count
     return 0 unless iteration_start_timer
-    short_breaks.count(:id.gte => iteration_start_timer[:id])
+    timers.short_breaks.where(:created_at.gte => iteration_start_timer.created_at).count
   end
 
   def next_timer
     case
-    when timers.empty?, [ShortBreak,LongBreak].include?(last_timer.class)
+    when timers.empty?, [ShortBreak,LongBreak].include?(timers.last.class)
       Pomodoro
     when iteration_short_breaks_count < SHORTS_TIL_LONG  ; ShortBreak
     when iteration_short_breaks_count >= SHORTS_TIL_LONG ; LongBreak
@@ -65,19 +48,11 @@ class Session
   end
 
   def recent_timers
-    timers(:order => [:created_at.desc]).recent
+    timers.desc(:created_at).recent
   end
 
   def reset!
-    timers.destroy!
-  end
-
-  def status
-    if timers.empty? || last_timer.expired?
-      'No timer like the present'
-    else
-      "#{last_timer.label} in progress"
-    end
+    timers.clear
   end
 
   protected
@@ -88,6 +63,13 @@ class Session
 
   def self.next_name
     (last ? last.name : 'z').succ!
+  end
+
+  def sluggify(name)
+    return unless name.present?
+    name.gsub!(/\s/,'_')
+    name.gsub!(/[\W]/,'')
+    name.downcase
   end
 
 end

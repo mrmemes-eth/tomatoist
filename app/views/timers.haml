@@ -1,15 +1,15 @@
 #primary_controls
-  %form#reset{:action => session_reset_path(@session), :method => :post}
-    %input{:type => 'hidden', :name => '_method', :value => 'put'}
-    %input{ :value => "Reset Your Timers", :type => "submit" }
+  %form#reset{action: session_reset_path(@session), method: :post}
+    %input{type: 'hidden', name: '_method', value: 'put'}
+    %input{ value: "Reset Your Timers", type: "submit" }
   #timer_buttons
     - [Pomodoro,ShortBreak,LongBreak].each do |type|
-      = haml(:form, {:layout => false}, {:session => @session, :type => type})
-  %form#rename{:action => session_path(@session), :method => :post}
+      = haml(:form, {layout: false}, {session: @session, type: type})
+  %form#rename{action: session_path(@session), method: :post}
     %label== http://#{request.env['HTTP_HOST']}/
-    %input{:type => 'text', :name => 'custom', :value => @session.display_name }
-    %input{:type => 'hidden', :name => '_method', :value => 'put'}
-    %input{ :value => "rename", :type => "submit" }
+    %input{type: 'text', name: 'custom', value: @session.display_name }
+    %input{type: 'hidden', name: '_method', value: 'put'}
+    %input{ value: "rename", type: "submit" }
 
 #timer
   .countdown_row.countdown_amount 00:00
@@ -26,7 +26,7 @@
 #footer
   #twitter
   %p
-    %a{:href => '/faq', :rel => 'facebox'} What's this all about?
+    %a{href: '/faq', rel: 'facebox'} What's this all about?
 #help
   #help-container
     #background

@@ -17,7 +17,7 @@ Tomatoist.helpers do
 
   def timer
     return nil unless @session
-    @timer ||= @session.last_timer
+    @timer ||= @session.timers.last
   end
 
   def next_timer
@@ -27,7 +27,7 @@ Tomatoist.helpers do
   def timer_class(session,type)
     case
     when session.next_timer == type; 'next'
-    when session.last_timer.kind_of?(type); 'current'
+    when session.timers.last.kind_of?(type); 'current'
     end
   end
 

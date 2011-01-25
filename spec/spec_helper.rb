@@ -1,10 +1,15 @@
 PADRINO_ENV = 'test' unless defined?(PADRINO_ENV)
 require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
-require File.expand_path(File.dirname(__FILE__) + "/fixtures")
+
+require 'fabrication'
+require File.expand_path(File.dirname(__FILE__) + "/fabrications")
 
 RSpec.configure do |conf|
   conf.mock_with :rspec
   conf.include Rack::Test::Methods
+  conf.after(:each) do
+    Mongoid.master.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+  end
 end
 
 def app

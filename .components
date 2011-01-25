@@ -1,7 +1,7 @@
 --- 
-:orm: datamapper
+:orm: mongoid
 :test: rspec
-:mock: mocha
+:mock: rspec
 :script: none
 :renderer: haml
 :stylesheet: none
