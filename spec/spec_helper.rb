@@ -6,7 +6,6 @@ require File.expand_path(File.dirname(__FILE__) + "/fabrications")
 
 RSpec.configure do |conf|
   conf.mock_with :rspec
-  conf.include Rack::Test::Methods
   conf.after(:each) do
     Mongoid.master.collections.select {|c| c.name !~ /system/ }.each(&:drop)
   end
