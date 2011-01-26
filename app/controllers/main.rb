@@ -34,7 +34,7 @@ Tomatoist.controller do
 
   post '/:session/timers' do
     session = Session.retrieve(params[:session])
-    session.timers.create(type: params[:type])
+    session.timers.create({}, params[:type].constantize)
     redirect session_path(session)
   end
 end
