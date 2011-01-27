@@ -20,4 +20,4 @@ Running the App
 Running the Specs
 -----------------
 
-    rake && cucumber
+    rake
