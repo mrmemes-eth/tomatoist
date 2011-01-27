@@ -6,8 +6,8 @@
     - [Pomodoro,ShortBreak,LongBreak].each do |type|
       = haml(:form, {layout: false}, {session: @session, type: type})
   %form#rename{action: session_path(@session), method: :post}
-    %label== http://#{request.env['HTTP_HOST']}/
-    %input{type: 'text', name: 'custom', value: @session.display_name }
+    %label{ for: 'custom' } http://#{request.env['HTTP_HOST']}/
+    %input{type: 'text', name: 'custom', id: 'custom', value: @session.display_name }
     %input{type: 'hidden', name: '_method', value: 'put'}
     %input{value: 'rename', type: 'submit'}
 

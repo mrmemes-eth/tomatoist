@@ -1,4 +1,4 @@
-Given /^I have the following session:$/ do |table|
+Given /^(?:I have )?the following session:$/ do |table|
   Registry[:session] = ::Session.create(table.rows_hash)
 end
 

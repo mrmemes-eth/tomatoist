@@ -22,7 +22,7 @@ Tomatoist.controller do
 
   put '/:session' do
     session = Session.retrieve(params[:session])
-    session.update(custom: params[:custom])
+    session.update_attributes(custom: params[:custom])
     redirect session_path(session.reload)
   end
 
