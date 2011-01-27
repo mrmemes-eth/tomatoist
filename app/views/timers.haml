@@ -1,7 +1,7 @@
 #primary_controls
   %form#reset{action: session_reset_path(@session), method: :post}
     %input{type: 'hidden', name: '_method', value: 'put'}
-    %input{ value: "Reset Your Timers", type: "submit" }
+    %input{value: 'Clear Timers', type: 'submit'}
   #timer_buttons
     - [Pomodoro,ShortBreak,LongBreak].each do |type|
       = haml(:form, {layout: false}, {session: @session, type: type})
@@ -9,7 +9,7 @@
     %label== http://#{request.env['HTTP_HOST']}/
     %input{type: 'text', name: 'custom', value: @session.display_name }
     %input{type: 'hidden', name: '_method', value: 'put'}
-    %input{ value: "rename", type: "submit" }
+    %input{value: 'rename', type: 'submit'}
 
 #timer
   .countdown_row.countdown_amount 00:00
