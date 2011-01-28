@@ -44,6 +44,10 @@ GEM
       json (~> 1.4.6)
     git (1.2.5)
     haml (3.0.25)
+    heroku (1.17.10)
+      json (~> 1.4.6)
+      launchy (~> 0.3.2)
+      rest-client (>= 1.4.0, < 1.7.0)
     highline (1.6.1)
     http_router (0.4.1)
       rack (>= 1.0.0)
@@ -104,6 +108,8 @@ GEM
     rack-test (0.5.7)
       rack (>= 1.0)
     rake (0.8.7)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -161,6 +167,7 @@ DEPENDENCIES
   cucumber-sinatra (~> 0.3.0)
   fabrication (~> 0.9.4)
   haml (~> 3.0.25)
+  heroku
   launchy
   mocha (~> 0.9.10)
   mongoid (~> 2.0.0.rc.5)

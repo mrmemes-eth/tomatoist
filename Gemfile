@@ -11,6 +11,7 @@ gem 'mongoid', '~> 2.0.0.rc.5'
 group :development, :test do
   gem 'ruby-debug19'
   gem 'fabrication', '~> 0.9.4'
+  gem 'heroku'
 end
 
 group :test do
