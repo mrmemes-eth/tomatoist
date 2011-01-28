@@ -3,6 +3,7 @@ source :rubygems
 gem 'rake'
 gem 'thin'
 gem 'rack-flash'
+gem 'rack_hoptoad', require: 'rack/hoptoad'
 
 gem 'haml', '~> 3.0.25'
 gem 'bson_ext'

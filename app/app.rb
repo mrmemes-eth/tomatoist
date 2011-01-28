@@ -1,4 +1,5 @@
 class Tomatoist < Padrino::Application
+  register HoptoadInitializer
   register Padrino::Mailer
   register Padrino::Helpers
 
