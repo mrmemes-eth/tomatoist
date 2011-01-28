@@ -15,7 +15,7 @@ Tomatoist.controller do
 
   get '/:session/status.js/?' do
     session = Session.retrieve(params[:session])
-    if session && (timer = session.last_timer)
+    if session && (timer = session.timers.last)
       { expired: timer.expired? }.to_json
     end
   end
