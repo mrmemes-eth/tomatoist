@@ -1,0 +1,22 @@
+{
+  "name": "Tomatoist",
+  "description": "I'm an easy way to keep track of your timers while using the Pomodoro Technique.",
+  "version": "0.1",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "app": {
+    "urls": [
+      "http://tomatoi.st/"
+    ],
+    "launch": {
+      "web_url": "http://tomatoi.st/",
+      "container": "panel",
+      "width": 900,
+      "height":600
+    }
+  },
+  "permissions": [
+    "notifications"
+  ]
+}
