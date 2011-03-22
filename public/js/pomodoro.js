@@ -1,5 +1,6 @@
 soundManager.url = 'swf/';
 soundManager.debugMode = false;
+soundManager.useHTML5Audio = true;
 
 String.prototype.lpad = function(padString, length) {
   var str = this;
