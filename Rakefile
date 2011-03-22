@@ -12,3 +12,13 @@ Cucumber::Rake::Task.new(:features) do |t|
 end
 
 task default: [:spec, :features]
+
+desc "Package for webstore"
+task :pkg do
+  require 'zippy'
+  Zippy.create('tomatoist.zip') do |zip|
+    Dir.glob('webstore/**/*').each do |file|
+      zip[file] = File.open(file) unless File.directory?(file)
+    end
+  end
+end

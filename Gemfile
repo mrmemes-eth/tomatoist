@@ -13,6 +13,7 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'fabrication', '~> 0.9.4'
   gem 'heroku'
+  gem 'zippy'
 end
 
 group :test do
