@@ -18,7 +18,9 @@
   %ul
     - @session.recent_timers.each do |timer|
       %li
-        = timer.class.label
+        .label
+          %a{href: edit_timer_path(timer)}
+            = timer.class.label
         %span.time
           = distance_of_time_in_words(timer.created_at,Time.now)
           ago

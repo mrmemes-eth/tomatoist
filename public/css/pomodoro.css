@@ -251,7 +251,7 @@ div#primary_controls form#rename input[type="submit"]{
 }
 
 #history ul li {
-  padding: 0.5em 6em 0.6em 0.5em;
+  padding: 0 6em 0 0.5em;
   background: #ddd;
   margin-bottom: 1px;
   position: relative;
@@ -276,6 +276,16 @@ div#primary_controls form#rename input[type="submit"]{
   right: 0.5em;
   top: 0.75em;
   font-size: 0.75em;
+}
+#history ul li a.label{
+  padding-right: 36px;
+  line-height:32px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+#history ul li a.label:hover {
+  background: url(/imgs/add_note.png) 100% 50% no-repeat;
 }
 
 /* @end */

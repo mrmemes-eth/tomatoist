@@ -15,6 +15,11 @@ Tomatoist.helpers do
     "#{session_path(session)}/timers"
   end
 
+
+  def edit_timer_path(timer)
+    url_for(:timers, timer.id, :edit)
+  end
+
   def timer
     return nil unless @session
     @timer ||= @session.timers.last

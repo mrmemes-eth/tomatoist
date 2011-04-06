@@ -178,7 +178,7 @@ DEPENDENCIES
   heroku
   launchy
   mocha (~> 0.9.12)
-  mongoid (~> 2.0.0.rc.7)
+  mongoid (~> 2.0.0)
   padrino (~> 0.9.23)
   rack-flash
   rack_hoptoad

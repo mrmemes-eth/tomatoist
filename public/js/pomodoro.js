@@ -21,6 +21,12 @@ $(function(){
     headingText: "News",
     showProfileLink: false
   });
+
+  $('.label a').click(function(e){
+    $link = $(this);
+    $link.closest('.label').load($link.attr('href'));
+    return false;
+  });
 });
 
 function audibleAlert(){
