@@ -1,5 +1,5 @@
 #primary_controls
-  %form#reset{action: session_reset_path(@session), method: :post}
+  %form#r{action: session_reset_path(@session), method: :post}
     %input{type: 'hidden', name: '_method', value: 'put'}
     %input{value: 'Clear Timers', type: 'submit'}
   #timer_buttons
@@ -48,6 +48,12 @@
             Long Break
           %td
             #{escape_html "<Ctrl>"} + l
+        %tr
+          %td.left
+            Clear Timers
+          %td
+            #{escape_html "<Ctrl>"} + r
+
         %tr
           %td.left
             Help

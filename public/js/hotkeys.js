@@ -1,4 +1,5 @@
 var pKey = 80;
+var rKey = 82;
 var sKey = 83;
 var lKey = 76;
 
@@ -7,7 +8,7 @@ $(function () {
   $(document).bind(event_type, function(e){
     //console.log(e.type,"keyCode:"+e.keyCode,"which:"+e.which,"charCode:"+String.fromCharCode(e.which));
     if(e.ctrlKey){
-      if($.inArray(e.which, [pKey,sKey,lKey]) > -1){
+      if($.inArray(e.which, [pKey,rKey,sKey,lKey]) > -1){
         $('#' + String.fromCharCode(e.which).toLowerCase()).submit();
       }
     }
