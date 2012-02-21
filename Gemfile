@@ -7,7 +7,7 @@ gem 'rack_hoptoad', require: 'rack/hoptoad'
 
 gem 'haml', '~> 3.0.25'
 gem 'bson_ext'
-gem 'mongoid', '~> 2.0.0.rc.7'
+gem 'mongoid', '~> 2.0.0.rc.5'
 
 group :development, :test do
   gem 'ruby-debug19'

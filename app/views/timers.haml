@@ -1,7 +1,7 @@
 #primary_controls
-  %form#r{action: session_reset_path(@session), method: :post}
+  %form#reset{action: session_reset_path(@session), method: :post}
     %input{type: 'hidden', name: '_method', value: 'put'}
-    %input{value: 'Clear Timers', type: 'submit'}
+    %input{value: 'Clear Timers', type: 'submit', id: 'r'}
   #timer_buttons
     - [Pomodoro,ShortBreak,LongBreak].each do |type|
       = haml(:form, {layout: false}, {session: @session, type: type})
