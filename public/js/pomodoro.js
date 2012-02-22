@@ -11,16 +11,6 @@ String.prototype.lpad = function(padString, length) {
 
 $(function(){
   $('a[rel*=facebox]').facebox();
-
-  $("#twitter").getTwitter({
-    userName: "tomatoist",
-    numTweets: 3,
-    loaderText: "Loading tweets...",
-    slideIn: false,
-    showHeading: true,
-    headingText: "News",
-    showProfileLink: false
-  });
 });
 
 function audibleAlert(){

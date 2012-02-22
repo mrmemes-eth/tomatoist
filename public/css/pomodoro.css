@@ -287,16 +287,7 @@ div#primary_controls form#rename input[type="submit"]{
   margin: 3em auto 0;
   font-size: 0.85em;
   line-height: 1.33em;
-  text-align: left;
-}
-
-#footer #twitter{
-  margin-bottom: 2em;
-}
-
-#twitter h2 {
-  font-weight: bold;
-  margin-bottom: 0.5em;
+  text-align: center;
 }
 
 #facebox dl#faq {
