@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Pomodoro do
   subject { Fabricate(:pomodoro) }
-  specify { subject.duration.should == 1500 }
+  its(:duration) { should == 1500 }
 
   it "reports it's name" do
     Pomodoro.label.should == 'Pomodoro'

@@ -7,7 +7,7 @@ require 'capybara/cucumber'
 Capybara.app = Tomatoist.tap { |app| }
 
 class TomatoistWorld
-  include Capybara
+  include Capybara::DSL
   include RSpec::Expectations
   include RSpec::Matchers
 end

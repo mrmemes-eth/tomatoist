@@ -7,11 +7,12 @@ Fabricator(:session_with_timers, from: :session) do
 end
 
 Fabricator(:timer) do
+  session
   duration 25*60
 end
 
-Fabricator(:pomodoro)
+Fabricator(:pomodoro, from: :timer, class_name: :Pomodoro)
 
-Fabricator(:short_break)
+Fabricator(:short_break, from: :timer, class_name: :ShortBreak)
 
-Fabricator(:long_break)
+Fabricator(:long_break, from: :timer, class_name: :LongBreak)

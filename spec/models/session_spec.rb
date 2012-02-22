@@ -10,7 +10,7 @@ describe Session do
       context 'requires it to be unique' do
         let(:params) { { custom: 'foo' } }
         before{ Fabricate(:session, custom: 'foo') }
-        it { subject[:custom].should include('has already been taken') }
+        it { subject[:custom].should include('is already taken') }
       end
 
       context 'allows it to be blank' do

@@ -3,5 +3,5 @@ Given /^(?:I )(?:am )?view(?:ing)? (.+)$/ do |page_name|
 end
 
 Then /^(?:|I )should be viewing (.+)$/ do |page_name|
-  Then "I should be on #{page_name}"
+  step("I should be on #{page_name}")
 end

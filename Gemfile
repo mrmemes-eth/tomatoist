@@ -2,27 +2,25 @@ source :rubygems
 
 gem 'rake'
 gem 'thin'
-gem 'rack-flash'
 gem 'rack_hoptoad', require: 'rack/hoptoad'
 
 gem 'haml', '~> 3.0.25'
 gem 'bson_ext'
-gem 'mongoid', '~> 2.0.0.rc.5'
+gem 'mongoid', '~> 2.4.4'
 
 group :development, :test do
   gem 'ruby-debug19'
-  gem 'fabrication', '~> 0.9.5'
+  gem 'fabrication', '~> 1.3.1'
   gem 'heroku'
   gem 'zippy'
 end
 
 group :test do
-  gem 'mocha', '~> 0.9.12'
-  gem 'rspec', '~> 2.5.0'
-  gem 'capybara', '~> 0.4.1.2'
+  gem 'mocha', '~> 0.10.4'
+  gem 'rspec', '~> 2.8.0'
+  gem 'capybara', '~> 1.1.2'
   gem 'launchy'
-  gem 'cucumber', '~> 0.10.2'
-  gem 'cucumber-sinatra', '~> 0.3.0'
+  gem 'cucumber', '~> 1.1.8'
 end
 
-gem 'padrino', '~> 0.9.23'
+gem 'padrino', '~> 0.10.5'

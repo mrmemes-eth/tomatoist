@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe LongBreak do
   subject { Fabricate(:long_break) }
-  specify { subject.duration.should == 900 }
+  its(:duration) { should == 900 }
 
   context "#label" do
     subject { LongBreak.label }
