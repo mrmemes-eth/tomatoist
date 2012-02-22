@@ -1,16 +1,15 @@
 Tomatoist.controller do
-
   get '/' do
     redirect session_path(Session.create)
   end
 
   get '/faq' do
-    haml(:faq, layout: false)
+    render(:haml, :faq, layout: :application)
   end
 
   get '/:session/?' do
     @session = Session.retrieve(params[:session])
-    haml :timers
+    render(:haml, :timers, layout: :application)
   end
 
   get '/:session/status.js/?' do
