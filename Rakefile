@@ -1,5 +1,9 @@
-require 'rspec/core/rake_task'
-require 'cucumber/rake/task'
+begin
+  require 'rspec/core/rake_task'
+  require 'cucumber/rake/task'
+rescue LoadError
+  puts "RSpec and/or Cucumber are unavailable"
+end
 
 desc "Run specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
