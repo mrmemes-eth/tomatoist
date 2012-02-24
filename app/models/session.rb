@@ -17,7 +17,7 @@ class Session
   SHORTS_TIL_LONG = 3
 
   def self.retrieve(session)
-    any_of({name: session}, {custom: session}).first || create(custom: session)
+    any_of({name: session}, {custom: session})[0] || create(custom: session)
   end
 
   def custom=(name)
