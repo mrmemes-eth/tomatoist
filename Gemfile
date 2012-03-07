@@ -24,3 +24,4 @@ group :test do
 end
 
 gem 'padrino', '~> 0.10.5'
+gem 'padrino-cookies', '~> 0.1.0'

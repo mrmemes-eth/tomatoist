@@ -1,6 +1,10 @@
 Tomatoist.controller do
   get '/' do
-    redirect session_path(Session.create)
+    if cookies.has_key?(:current_session)
+      redirect "/#{cookies[:current_session]}"
+    else
+      redirect session_path(Session.create)
+    end
   end
 
   get '/faq' do
@@ -8,6 +12,8 @@ Tomatoist.controller do
   end
 
   get '/:session/?' do
+    return if params[:session] == 'null'
+    cookies.permanent[:current_session] = params[:session]
     @session = Session.retrieve(params[:session])
     render(:haml, :timers, layout: :application)
   end

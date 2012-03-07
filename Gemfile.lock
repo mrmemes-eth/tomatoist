@@ -82,6 +82,8 @@ GEM
       padrino-helpers (= 0.10.5)
     padrino-cache (0.10.5)
       padrino-core (= 0.10.5)
+    padrino-cookies (0.1.0)
+      padrino-core
     padrino-core (0.10.5)
       activesupport (~> 3.1.0)
       http_router (~> 0.10.2)
@@ -172,6 +174,7 @@ DEPENDENCIES
   mocha (~> 0.10.4)
   mongoid (~> 2.4.4)
   padrino (~> 0.10.5)
+  padrino-cookies (~> 0.1.0)
   rack_hoptoad
   rake
   rspec (~> 2.8.0)

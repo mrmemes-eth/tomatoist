@@ -2,6 +2,7 @@ class Tomatoist < Padrino::Application
   register HoptoadInitializer
   register Padrino::Mailer
   register Padrino::Helpers
+  register Padrino::Cookies
 
   ##
   # Application configuration options
