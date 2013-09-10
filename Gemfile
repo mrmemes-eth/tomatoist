@@ -11,7 +11,6 @@ gem 'mongoid', '~> 2.4.4'
 group :development, :test do
   gem 'ruby-debug19'
   gem 'fabrication', '~> 1.3.1'
-  gem 'heroku'
   gem 'zippy'
 end
 
