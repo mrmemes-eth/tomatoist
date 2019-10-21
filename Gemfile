@@ -12,7 +12,7 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'fabrication', '~> 1.3.1'
   gem 'zippy'
-  gem 'rubyzip', '~> 0.9.9'
+  gem 'rubyzip', '~> 1.3.0'
 end
 
 group :test do
