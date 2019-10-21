@@ -4,7 +4,7 @@ gem 'rake'
 gem 'unicorn'
 gem 'rack_hoptoad', require: 'rack/hoptoad'
 
-gem 'haml', '~> 3.0.25'
+gem 'haml', '~> 5.0.0'
 gem 'bson_ext'
 gem 'mongoid', '~> 2.4.4'
 
