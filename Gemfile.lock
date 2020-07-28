@@ -42,7 +42,7 @@ GEM
       rack (>= 1.0.0)
       url_mount (~> 0.2.1)
     i18n (0.6.5)
-    json (1.8.0)
+    json (2.3.1)
     kgio (2.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
